@@ -1,17 +1,37 @@
 """Main product initializer
 """
-
-from zope.i18nmessageid import MessageFactory
-from pd.prenotazioni import config
-
+from App.config import getConfiguration
 from Products.Archetypes import atapi
 from Products.CMFCore import utils
+from cgi import logfile
+from logging import getLogger, FileHandler, Formatter
+from pd.prenotazioni import config
+from zope.i18nmessageid import MessageFactory
 
-# Define a message factory for when this product is internationalised.
-# This will be imported with the special name "_" in most modules. Strings
-# like _(u"message") will then be extracted by i18n tools for translation.
 
 prenotazioniMessageFactory = MessageFactory('pd.prenotazioni')
+prenotazioniLogger = getLogger('pd.prenotazioni')
+prenotazioniFileLogger = getLogger('pd.prenotazioni.file')
+
+
+def init_handler():
+    '''
+    Protect the namespace
+    '''
+    if prenotazioniFileLogger.handlers:
+        return
+    product_config = getattr(getConfiguration(), 'product_config', {})
+    config = product_config.get('pd.prenotazioni', {})
+    logfile = config.get('logfile')
+    if not logfile:
+        return
+    hdlr = FileHandler(logfile)
+    formatter = Formatter('%(asctime)s %(levelname)s %(message)s',
+                          "%Y-%m-%d %H:%M:%S")
+    hdlr.setFormatter(formatter)
+    prenotazioniFileLogger.addHandler(hdlr)
+
+init_handler()
 
 
 def initialize(context):
@@ -44,7 +64,7 @@ def initialize(context):
 
     for atype, constructor in zip(content_types, constructors):
         utils.ContentInit('%s: %s' % (config.PROJECTNAME, atype.portal_type),
-            content_types=(atype, ),
+            content_types=(atype,),
             permission=config.ADD_PERMISSIONS[atype.portal_type],
             extra_constructors=(constructor,),
             ).initialize(context)
