@@ -57,6 +57,7 @@ setup(name='pd.prenotazioni',
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
                         'rg.prenotazioni',
+                        'plone.api'
                         ],
       tests_require=tests_require,
       extras_require=dict(test=tests_require),

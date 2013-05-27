@@ -4,5 +4,6 @@ Changelog
 0.9.0-dev (unreleased)
 ----------------------
 
+- Added event handler logger
 - Package created using templer
   [RedTurtle Technology]
