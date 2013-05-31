@@ -83,6 +83,8 @@ Tel: <i>010.68.94.39</i>
         <td><para style="bold">Tipo</para></td><td tal:content="prenotazione/getTipologia_prenotazione"></td>
     </tr><tr>
         <td><para style="bold">Data</para></td><td tal:content="prenotazione/getData_prenotazione"></td>
+    </tr><tr>
+        <td><para style="bold">Sportello</para></td><td tal:content="prenotazione/getGate"></td>
     </tr>
     </blockTable>
     <spacer length="1cm" width="1mm"/>
