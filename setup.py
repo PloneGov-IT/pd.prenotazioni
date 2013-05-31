@@ -57,7 +57,8 @@ setup(name='pd.prenotazioni',
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
                         'rg.prenotazioni',
-                        'plone.api'
+                        'plone.api',
+                        'z3c.pdftemplate'
                         ],
       tests_require=tests_require,
       extras_require=dict(test=tests_require),
@@ -67,6 +68,4 @@ setup(name='pd.prenotazioni',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      setup_requires=["PasteScript"],
-      paster_plugins=["templer.localcommands"],
       )

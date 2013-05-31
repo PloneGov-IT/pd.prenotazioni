@@ -22,7 +22,15 @@
       description="PD Prenotazioni"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="GDF: Bandi Extension Uninstall"
+      directory="profiles/uninstall"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>
