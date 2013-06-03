@@ -1,0 +1,9 @@
+Changelog
+=========
+
+1.0.0 (unreleased)
+-------------
+
+- Aggiunto validatore campi email, telefono e cellulare in form richiesta 
+  prenotazioni [nicolasenno]
+- Rimosso campo email obbligatorio form richiesta prenotazioni [nicolasenno]
