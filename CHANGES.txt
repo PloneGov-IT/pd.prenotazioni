@@ -1,6 +1,8 @@
 Changelog
 =========
 
+## Thsi changes file is duplicated. Check the main one under buildout-dir ##
+
 0.9.0-dev (unreleased)
 ----------------------
 
