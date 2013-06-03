@@ -80,6 +80,8 @@ Tel: <i>010.68.94.39</i>
     </tr><tr>
         <td><para style="bold">Telefono</para></td><td tal:content="prenotazione/getTelefono"></td>
     </tr><tr>
+        <td><para style="bold">Cellulare</para></td><td tal:content="prenotazione/getMobile"></td>
+    </tr><tr>
         <td><para style="bold">Tipo</para></td><td tal:content="prenotazione/getTipologia_prenotazione"></td>
     </tr><tr>
         <td><para style="bold">Data</para></td><td tal:content="prenotazione/getData_prenotazione"></td>
