@@ -56,8 +56,9 @@ setup(name='pd.prenotazioni',
       zip_safe=False,
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
-                        'rg.prenotazioni',
+                        'pd.contentrules.sms',
                         'plone.api',
+                        'rg.prenotazioni',
                         'z3c.pdftemplate'
                         ],
       tests_require=tests_require,
