@@ -20,9 +20,8 @@ def on_workflow_change(obj, event):
     This handler logs a cvs string for
     each IPrenotazione workflow changes
     '''
-    review_state = api.content.get_state(obj=obj)
     user = api.user.get_current()
-    data = [obj.UID(), obj.Title(), user.getId(), review_state]
+    data = [obj.UID(), obj.Title(), user.getId(), event.action]
     logger.info(csv2string(data))
 
 
