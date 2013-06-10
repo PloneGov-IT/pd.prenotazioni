@@ -9,8 +9,8 @@
   <includeDependencies package="." />
 
   <!-- Include the sub-packages that use their own configure.zcml files. -->
+  <include package=".actions" />
   <include package=".browser" />
-  <include package=".content" />
   <include package=".events" />
   <include package=".portlets" />
   
@@ -25,7 +25,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="GDF: Bandi Extension Uninstall"
+      title="PD Prenotazioni Uninstall"
       directory="profiles/uninstall"
       description=""
       provides="Products.GenericSetup.interfaces.EXTENSION"
