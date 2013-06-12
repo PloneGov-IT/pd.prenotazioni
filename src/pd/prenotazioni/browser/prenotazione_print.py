@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
-from pd.prenotazioni import prenotazioniMessageFactory as _
 from plone.memoize.view import memoize
-from rg.prenotazioni.browser.prenotazione_print import PrenotazionePrint
+from rg.prenotazioni.browser.prenotazione_print import PrenotazionePrint as BasePrintView
 
 
-class PrenotazionePrintPDF(PrenotazionePrint):
+class PrenotazionePrint(BasePrintView):
     '''
     This is a view to proxy autorizzazione
     '''
-    title = _("booking_receipt", "Booking receipt")
 
     @property
     @memoize
-    def rml_options(self):
-        '''
-        Return the options for this prenotazione
-        '''
-        return {'prenotazione': self.prenotazione,
-                'logo': ''
-                }
+    def print_action(self):
+        """
+        Link to prenotazioni_print_pdf
+        """
+        return self.context.absolute_url() + '/prenotazione_print_pdf?uid='+ self.request.get("uid")
+
