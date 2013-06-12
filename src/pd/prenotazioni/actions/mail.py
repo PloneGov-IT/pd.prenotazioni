@@ -22,6 +22,7 @@ class MailActionExecutor(BaseExecutor):
          - ${gate}
          - ${date}
          - ${time}
+         - ${type}
         '''
         mapping = super(MailActionExecutor, self).get_mapping()
         event_obj = self.event.object
@@ -30,6 +31,8 @@ class MailActionExecutor(BaseExecutor):
             return mapping
 
         mapping['gate'] = event_obj.getGate() or ''
+        mapping['type'] = event_obj.getTipologia_prenotazione() or ''
+
         event_obj_date = event_obj.Date()
         if not event_obj_date:
             return mapping
