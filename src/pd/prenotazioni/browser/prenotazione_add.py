@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone.memoize.view import memoize
-from rg.prenotazioni.browser.prenotazione_add import AddForm as BaseForm, \
-    InvalidPhone
+from rg.prenotazioni.browser.prenotazione_add import AddForm as BaseForm
 from zope.schema import ValidationError
 import re
 from pd.prenotazioni import prenotazioniMessageFactory as _
@@ -10,11 +9,7 @@ TELEPHONE_PATTERN = re.compile(r'^3([0-9]| )*$')
 
 
 class InvalidMobile(ValidationError):
-    "Mobile phone number not valid"
-
-
-class InvalidformRequrements(ValidationError):
-    "Insert a valid email address or a valid phone number or a valid mobile number"
+    __doc__ = _("invalid_mobile_number", "Mobile phone number not valid")
 
 
 def check_mobile_number(value):
@@ -27,7 +22,7 @@ def check_mobile_number(value):
         value = value.strip()
     if TELEPHONE_PATTERN.match(value) is not None:
         return True
-    raise InvalidPhone(value)
+    raise InvalidMobile(value)
 
 
 class AddForm(BaseForm):
@@ -52,7 +47,9 @@ class AddForm(BaseForm):
         '''
         errors = super(AddForm, self).validate(action, data)
         if not any([data.get(key, False) for key in self.contact_details]):
-            msg = _(u'You have to provide at least one of these fields.')
+            msg = _('contact_details_error',
+                    u'You have to provide at least one of these fields: '
+                    u'email, phone, mobile')
             self.set_invariant_error(errors, self.contact_details, msg)
 
         return errors
