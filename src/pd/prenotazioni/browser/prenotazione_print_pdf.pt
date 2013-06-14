@@ -17,10 +17,10 @@ xmlns:tal="http://xml.zope.org/namespaces/tal"
         <pageTemplate id="first">
         <pageGraphics>
             <lines>2cm 3.2cm 19cm 3.2cm</lines>
-            <drawCentredString x="105mm" y="3.4cm" 
-              tal:content="context/portal_url">www.printbox.be - 0477/76.18.56 - printbox.be</drawCentredString>
-            <!--drawCentredString x="105mm" y="2.6cm">Tiny SPRL - rue Joseph Mathieu, 28 - B-1300 Limal - BELGIQUE - info@tiny.be</drawCentredString>
-            <drawCentredString x="105mm" y="2.0cm">RCN 95656 - TVA BE477.472.701 - IBAN: BE74 1262 0132 6907 - SWIFT: ARTEBEBB</drawCentredString-->
+            <!--drawCentredString x="105mm" y="3.4cm" 
+              tal:content="context/portal_url">www.printbox.be - 0477/76.18.56 - printbox.be</drawCentredString-->
+            <drawString x="20mm" y="2.6cm" tal:content="structure view/footer_text"></drawString>
+            <!--drawCentredString x="105mm" y="2.0cm">RCN 95656 - TVA BE477.472.701 - IBAN: BE74 1262 0132 6907 - SWIFT: ARTEBEBB</drawCentredString-->
             <image file="[z3c.pdftemplate]/sample/devis_logo.jpg" x="23mm" y="23cm" 
               tal:attributes="file string:${context/portal_url}/logo.png"
               />

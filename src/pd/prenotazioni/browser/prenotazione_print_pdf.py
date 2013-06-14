@@ -10,6 +10,8 @@ class PrenotazionePrintPDF(PrenotazionePrint):
     '''
     title = _("booking_receipt", "Booking receipt")
 
+    footer_text = "Comune di Padova - Sistema di prenotazione unico"
+
     @property
     @memoize
     def rml_options(self):
