@@ -33,4 +33,26 @@
     />
   </configure>  
 
+  <configure package="plone.app.content">
+    <!-- Folder contents -->
+    <browser:page
+         for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+         class="pd.prenotazioni.browser.foldercontents.PrenotazioniFolderContentsBrowserView"
+         attribute="update_table"
+         name="foldercontents_get_table"
+         permission="cmf.ListFolderContents" 
+         layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
+    />
+    
+    <browser:page
+        for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+        class="pd.prenotazioni.browser.foldercontents.PrenotazioniFolderContentsView"
+        name="folder_contents"
+        template="browser/folder_contents.pt"
+        layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
+        permission="cmf.ListFolderContents" 
+    />
+
+  </configure>
+
 </configure>
