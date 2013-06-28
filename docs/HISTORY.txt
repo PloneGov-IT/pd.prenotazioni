@@ -4,6 +4,8 @@ Changelog
 1.0.0 (unreleased)
 -------------
 
+- Patching Prenotazione schema to allow modification to prenotazione objects
+  without email [alert]
 - Removed buttons from the folder_contents view of PrenotazioniFolder [alert]
 - Removed actions menu for Prenotazione [alert]
 - Aggiunto validatore campi email, telefono e cellulare in form richiesta

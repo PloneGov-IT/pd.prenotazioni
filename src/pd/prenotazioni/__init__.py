@@ -7,6 +7,7 @@ from cgi import logfile
 from logging import getLogger, FileHandler, Formatter
 from pd.prenotazioni import config
 from zope.i18nmessageid import MessageFactory
+from rg.prenotazioni.content.prenotazione import PrenotazioneSchema
 
 
 prenotazioniMessageFactory = MessageFactory('pd.prenotazioni')
@@ -68,3 +69,5 @@ def initialize(context):
             permission=config.ADD_PERMISSIONS[atype.portal_type],
             extra_constructors=(constructor,),
             ).initialize(context)
+
+    PrenotazioneSchema['email'].required = False
