@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+from pd.prenotazioni import prenotazioniMessageFactory as _
 from plone.memoize.view import memoize
 from rg.prenotazioni.browser.prenotazione_add import AddForm as BaseForm
 from zope.schema import ValidationError
 import re
-from pd.prenotazioni import prenotazioniMessageFactory as _
 
 TELEPHONE_PATTERN = re.compile(r'^3([0-9]| )*$')
 

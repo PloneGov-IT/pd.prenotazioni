@@ -4,10 +4,12 @@ Changelog
 1.0.0 (unreleased)
 -------------
 
+- Added logger for IPrenotazione objects modification [nicolasenno]
 - Patching Prenotazione schema to allow modification to prenotazione objects
   without email [alert]
 - Removed buttons from the folder_contents view of PrenotazioniFolder [alert]
 - Removed actions menu for Prenotazione [alert]
 - Aggiunto validatore campi email, telefono e cellulare in form richiesta
   prenotazioni [nicolasenno]
+- Added events logger for IPrenotazione [nicolasenno]
 - Rimosso campo email obbligatorio form richiesta prenotazioni [nicolasenno]

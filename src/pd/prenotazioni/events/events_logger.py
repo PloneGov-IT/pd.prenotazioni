@@ -33,3 +33,13 @@ def on_move(obj, event):
     user = api.user.get_current()
     data = [obj.UID(), obj.Title(), user.getId(), 'moved']
     logger.info(csv2string(data))
+
+
+def on_modify(obj, event):
+    '''
+    This handler logs a cvs string for
+    every IPrenotazione document modified
+    '''
+    user = api.user.get_current()
+    data = [obj.UID(), obj.Title(), user.getId(), 'changed']
+    logger.info(csv2string(data))
