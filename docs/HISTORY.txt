@@ -1,8 +1,15 @@
 Changelog
 =========
 
+1.0.1 (unreleased)
+------------------
+
+- Upgrade step for repositorytool profile [nicolasenno]
+- Added to logger detail about modification, old value new value [nicolasenno] 
+
+
 1.0.0 (unreleased)
--------------
+------------------
 
 - Added logger for IPrenotazione objects modification [nicolasenno]
 - Patching Prenotazione schema to allow modification to prenotazione objects

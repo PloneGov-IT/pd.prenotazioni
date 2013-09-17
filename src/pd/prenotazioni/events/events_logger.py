@@ -3,6 +3,7 @@ from pd.prenotazioni import prenotazioniFileLogger as logger
 from plone import api
 import StringIO
 import csv
+import json
 
 
 def csv2string(data):
@@ -40,6 +41,24 @@ def on_modify(obj, event):
     This handler logs a cvs string for
     every IPrenotazione document modified
     '''
+
+    # Below a list of fields skipped from logger
+    skip_list = ['id', 'relatedItems', 'location',
+                 'creation_date', 'modification_date', 'excludeFromNav']
+
+    pr = obj.portal_repository
     user = api.user.get_current()
-    data = [obj.UID(), obj.Title(), user.getId(), 'changed']
+    old = pr.retrieve(obj, obj.version_id - 1).object
+    changes = []
+    for field in obj.schema.fields():
+        fname = field.getName()
+        if fname not in skip_list:
+            c_value = obj.getField(fname, obj).get(obj)
+            o_value = old.getField(fname, old).get(old)
+            if c_value != o_value:
+                changes.append({'new_' + fname: c_value,
+                                'old_' + fname: o_value})
+
+    data = [obj.UID(), obj.Title(), user.getId(), 'changed',
+                                                    json.dumps(changes)]
     logger.info(csv2string(data))
