@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
-from rg.prenotazioni import prenotazioniLogger as logger
+from pd.prenotazioni import prenotazioniLogger as logger
 
-PROJECTNAME = 'rg.prenotazioni'
-PROFILE_ID = 'profile-rg.prenotazioni:default'
+PROJECTNAME = 'pd.prenotazioni'
+PROFILE_ID = 'profile-pd.prenotazioni:default'
 
 
 def upgrade(upgrade_product, version):
