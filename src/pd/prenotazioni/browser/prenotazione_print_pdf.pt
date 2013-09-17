@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?> 
-<!DOCTYPE document SYSTEM "rml_1_0.dtd"> 
+<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?>
+<!DOCTYPE document SYSTEM "rml_1_0.dtd">
 <document filename="sample.pdf"
 xmlns:tal="http://xml.zope.org/namespaces/tal"
 >
 
- 
-<template pageSize="(210mm, 297mm)" 
-        leftMargin="12mm" 
-        rightMargin="10mm" 
-        topMargin="10mm" 
-        bottomMargin="10mm" 
-        author="" 
+
+<template pageSize="(210mm, 297mm)"
+        leftMargin="12mm"
+        rightMargin="10mm"
+        topMargin="10mm"
+        bottomMargin="10mm"
+        author=""
         showBoundary="0"
-        tal:attributes="title view/title" 
-        > 
+        tal:attributes="title view/title"
+        >
         <pageTemplate id="first">
         <pageGraphics>
             <lines>2cm 3.2cm 19cm 3.2cm</lines>
-            <!--drawCentredString x="105mm" y="3.4cm" 
+            <!--drawCentredString x="105mm" y="3.4cm"
               tal:content="context/portal_url">www.printbox.be - 0477/76.18.56 - printbox.be</drawCentredString-->
             <drawString x="20mm" y="2.6cm" tal:content="structure view/footer_text"></drawString>
             <!--drawCentredString x="105mm" y="2.0cm">RCN 95656 - TVA BE477.472.701 - IBAN: BE74 1262 0132 6907 - SWIFT: ARTEBEBB</drawCentredString-->
-            <image file="[z3c.pdftemplate]/sample/devis_logo.jpg" x="23mm" y="23cm" 
+            <image file="[z3c.pdftemplate]/sample/devis_logo.jpg" x="23mm" y="23cm"
               tal:attributes="file string:${context/portal_url}/logo.png"
               />
 
@@ -53,25 +53,25 @@ Tel: <i>010.68.94.39</i>
     </xpre>
     <nextFrame/>
     <para>
-        <b>Conferma prenotazione per:</b> 
+        <b>Conferma prenotazione per:</b>
     </para>
-    <para>
-        <tal:field 
-            tal:replace="rml_options/prenotazione/aq_parent/Title" 
+    <para tal:define="prenotazioni_folder rml_options/prenotazione/getPrenotazioniFolder">
+        <tal:field
+            tal:replace="prenotazioni_folder/Title"
         />
     </para>
     <spacer length="1cm" width="1mm"/>
     <tal:description condition="prenotazione/Description">
       <para style="bold">Oggetto:</para>
       <para>
-          <tal:field 
-              tal:replace="prenotazione/Description" 
+          <tal:field
+              tal:replace="prenotazione/Description"
           />
       </para>
       <spacer length="1cm" width="1mm"/>
     </tal:description>
     <para>
-        Gentile <b tal:content="prenotazione/Title">Fullname</b>, 
+        Gentile <b tal:content="prenotazione/Title">Fullname</b>,
         di seguito sono elencati i dati relativi alla sua prenotazione:
     </para>
     <spacer length="1cm" width="1mm"/>
