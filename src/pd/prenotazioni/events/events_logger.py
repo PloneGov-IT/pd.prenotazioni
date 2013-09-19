@@ -44,7 +44,8 @@ def on_modify(obj, event):
 
     # Below a list of fields skipped from logger
     skip_list = ['id', 'relatedItems', 'location',
-                 'creation_date', 'modification_date', 'excludeFromNav']
+                 'creation_date', 'modification_date', 'excludeFromNav',
+		 'effectiveDate']
 
     pr = api.portal.get_tool(name='portal_repository')
     user = api.user.get_current()
@@ -63,5 +64,5 @@ def on_modify(obj, event):
                                 'old_' + fname: o_value})
 
     data = [obj.UID(), obj.Title(), user.getId(), 'changed',
-                                                    json.dumps(changes)]
+            json.dumps(changes)]
     logger.info(csv2string(data))
