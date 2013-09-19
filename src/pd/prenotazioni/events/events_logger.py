@@ -48,7 +48,10 @@ def on_modify(obj, event):
 
     pr = api.portal.get_tool(name='portal_repository')
     user = api.user.get_current()
-    old = pr.retrieve(obj, obj.version_id - 1).object
+    old_version = getattr(obj, 'version_id', 0) -1
+    if old_version < 0:
+        return
+    old = pr.retrieve(obj, old_version).object
     changes = []
     for field in obj.schema.fields():
         fname = field.getName()
