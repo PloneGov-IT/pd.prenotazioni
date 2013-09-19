@@ -42,27 +42,25 @@ def on_modify(obj, event):
     every IPrenotazione document modified
     '''
 
-    # Below a list of fields skipped from logger
-    skip_list = ['id', 'relatedItems', 'location',
-                 'creation_date', 'modification_date', 'excludeFromNav',
-		 'effectiveDate']
-
-    pr = api.portal.get_tool(name='portal_repository')
-    user = api.user.get_current()
-    old_version = getattr(obj, 'version_id', 0) -1
+    old_version = getattr(obj, 'version_id', 0) - 1
     if old_version < 0:
         return
+
+    # Below a list of fields to be logged to
+    fnames = ['title', 'description', 'email', 'telefono', 'mobile',
+              'tipologia_prenotazione', 'azienda', 'gate']
+
+    pr = api.portal.get_tool(name='portal_repository')
     old = pr.retrieve(obj, old_version).object
     changes = []
-    for field in obj.schema.fields():
-        fname = field.getName()
-        if fname not in skip_list:
-            c_value = obj.getField(fname, obj).get(obj)
-            o_value = old.getField(fname, old).get(old)
-            if c_value != o_value:
-                changes.append({'new_' + fname: c_value,
-                                'old_' + fname: o_value})
+    for fname in fnames:
+        c_value = obj.getField(fname, obj).get(obj)
+        o_value = old.getField(fname, old).get(old)
+        if c_value != o_value:
+            changes.append({'new_' + fname: c_value,
+                            'old_' + fname: o_value})
 
+    user = api.user.get_current()
     data = [obj.UID(), obj.Title(), user.getId(), 'changed',
             json.dumps(changes)]
     logger.info(csv2string(data))
