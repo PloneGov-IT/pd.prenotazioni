@@ -46,7 +46,7 @@ def on_modify(obj, event):
     skip_list = ['id', 'relatedItems', 'location',
                  'creation_date', 'modification_date', 'excludeFromNav']
 
-    pr = obj.portal_repository
+    pr = api.portal.get_tool(name='portal_repository')
     user = api.user.get_current()
     old = pr.retrieve(obj, obj.version_id - 1).object
     changes = []
