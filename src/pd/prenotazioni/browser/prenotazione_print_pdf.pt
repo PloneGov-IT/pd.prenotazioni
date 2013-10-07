@@ -88,7 +88,7 @@ Tel: <i>010.68.94.39</i>
         <td><para style="bold">Data</para></td><td tal:content="python:toLocalizedTime(prenotazione.getData_prenotazione())"></td>
     </tr><tr>
         <td>Dalle <para style="bold">Ora</para></td><td tal:content="python:toLocalizedTime(prenotazione.getData_prenotazione(), time_only=True)">
-          alle  <para style="bold">Ora</para></td><td tal:content="python:toLocalizedTime(prenotazione.getData_scadenza(), time_only=True)">
+          alle <para style="bold">Ora</para></td><td tal:content="python:toLocalizedTime(prenotazione.getData_scadenza(), time_only=True)">
         </td>
     </tr><tr>
         <td><para style="bold">Sportello</para></td><td tal:content="prenotazione/getGate"></td>
