@@ -10,7 +10,14 @@ class PrenotazioniFolderContentsTable(FolderContentsTable):
     """
     The foldercontents table WITH NO BUTTONS
     """
-    buttons = []
+    @property
+    def buttons(self):
+        ''' Custom buttons
+        '''
+        roles = api.user.get_roles()
+        if 'Manager' in roles:
+            return
+        return []
 
 
 class PrenotazioniFolderContentsView(FolderContentsView):
@@ -18,15 +25,11 @@ class PrenotazioniFolderContentsView(FolderContentsView):
     The foldercontents CUSTOMIZED
     '''
     def contents_table(self):
-        ''' Hide folfer action if the user doesn't have Manager role
+        ''' Custom contetn-folder
         '''
-        roles = api.user.get_roles()
-        if 'Manager' in roles:
-            table = FolderContentsTable(aq_inner(self.context), self.request)
-            return table.render()
-        else:
-            table = PrenotazioniFolderContentsTable(aq_inner(self.context), self.request)
-            return table.render()
+        table = PrenotazioniFolderContentsTable(aq_inner(self.context),
+                                                self.request)
+        return table.render()
 
 
 class PrenotazioniFolderContentsBrowserView(FolderContentsBrowserView):
