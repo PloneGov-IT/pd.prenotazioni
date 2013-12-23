@@ -1,6 +1,15 @@
 Changelog
 =========
 
+
+1.0.2 (unreleased)
+------------------
+
+Note: for rg.prenotazioni > 3.0a
+
+- renamed creaPrenotazione -> prenotazione_add
+
+
 1.0.1 (unreleased)
 ------------------
 

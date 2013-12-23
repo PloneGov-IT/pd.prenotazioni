@@ -7,7 +7,7 @@
   
   <browser:page
     for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
-    name="creaPrenotazione"
+    name="prenotazione_add"
     layer=".interfaces.IPDPrenotazioniLayer"
     class=".prenotazione_add.AddForm"
     permission="zope2.View"
