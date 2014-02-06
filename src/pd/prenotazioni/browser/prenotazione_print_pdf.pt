@@ -55,13 +55,14 @@ Tel: <i>010.68.94.39</i>
     <para>
         <b>Richiesta prenotazione per:</b>
     </para>
-    <para>
-        Attendi conferma via mail o SMS
-    </para>
     <para tal:define="prenotazioni_folder rml_options/prenotazione/getPrenotazioniFolder">
         <tal:field
             tal:replace="prenotazioni_folder/Title"
         />
+    </para>
+    <spacer length="1cm" width="1mm"/>
+    <para style="bold">
+        Attendi conferma via mail o SMS
     </para>
     <spacer length="1cm" width="1mm"/>
     <tal:description condition="prenotazione/Description">
