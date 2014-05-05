@@ -3,7 +3,7 @@ Changelog
 
 ## Thsi changes file is duplicated. Check the main one under buildout-dir ##
 
-1.0.1 (2014-05-05)
+1.0.0 (2014-05-05)
 ------------------
 
 - Added event handler logger
