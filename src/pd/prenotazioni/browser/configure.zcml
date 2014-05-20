@@ -4,7 +4,7 @@
     i18n_domain="pd.prenotazioni">
 
   <include package="plone.app.contentmenu" />
-  
+
   <browser:page
     for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
     name="prenotazione_add"
@@ -12,7 +12,15 @@
     class=".prenotazione_add.AddForm"
     permission="zope2.View"
   />
- 
+
+  <browser:page
+    for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+    name="prenotazione_confirm"
+    layer=".interfaces.IPDPrenotazioniLayer"
+    class=".prenotazione_add.ConfirmForm"
+    permission="zope2.View"
+  />
+
   <browser:rml2pdf
     for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
     name="prenotazione_print_pdf"

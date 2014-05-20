@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-06-14 09:12+0000\n"
+"POT-Creation-Date: 2014-05-20 08:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,38 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#. Default: "Booking confirmation"
+#: ./browser/prenotazione_add.py:122
+msgid "booking_confirmation"
+msgstr ""
+
+#. Default: "We assigned you a booking time. Please review your data before confirming your booking"
+#: ./browser/prenotazione_add.py:126
+msgid "booking_confirmation_help"
+msgstr ""
+
 #. Default: "Booking receipt"
 #: ./browser/prenotazione_print_pdf.py:11
 msgid "booking_receipt"
 msgstr ""
 
+#. Default: "Invalid checksum"
+#: ./browser/prenotazione_add.py:139
+msgid "checksum_error"
+msgstr ""
+
 #. Default: "You have to provide at least one of these fields: email, phone, mobile"
-#: ./browser/prenotazione_add.py:50
+#: ./browser/prenotazione_add.py:79
 msgid "contact_details_error"
 msgstr ""
 
 #. Default: "Mobile phone number not valid"
-#: ./browser/prenotazione_add.py:12
+#: ./browser/prenotazione_add.py:17
 msgid "invalid_mobile_number"
+msgstr ""
+
+#. Default: "Verification code"
+#: ./browser/prenotazione_add.py:155
+msgid "verification_code"
 msgstr ""
 
