@@ -8,7 +8,7 @@ Changelog
 - Small modifications on pdf
 - Added a confirmation page for anonymous users.
 - Readers can search bookings
-- Requires rg.prenotazioni > 3.3.0
+- Requires rg.prenotazioni > 3.3.0.dev0
   [alert]
 
 
