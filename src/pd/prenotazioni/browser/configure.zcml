@@ -29,8 +29,18 @@
     class=".prenotazione_print_pdf.PrenotazionePrintPDF"
     permission="zope2.View"
   />
- 
+
   <configure package="rg.prenotazioni">
+
+    <browser:page
+      for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+      name="prenotazioni_week_view"
+      class="pd.prenotazioni.browser.week.View"
+      template="browser/week.pt"
+      permission="zope2.View"
+      layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
+    />
+
     <browser:page
       for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
       name="prenotazione_print"
@@ -39,26 +49,28 @@
       layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
       permission="zope2.View"
     />
-  </configure>  
+
+  </configure>
 
   <configure package="plone.app.content">
     <!-- Folder contents -->
+
     <browser:page
-         for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
-         class="pd.prenotazioni.browser.foldercontents.PrenotazioniFolderContentsBrowserView"
-         attribute="update_table"
-         name="foldercontents_get_table"
-         permission="cmf.ListFolderContents" 
-         layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
+      for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+      class="pd.prenotazioni.browser.foldercontents.PrenotazioniFolderContentsBrowserView"
+      attribute="update_table"
+      name="foldercontents_get_table"
+      permission="cmf.ListFolderContents"
+      layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
     />
-    
+
     <browser:page
-        for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
-        class="pd.prenotazioni.browser.foldercontents.PrenotazioniFolderContentsView"
-        name="folder_contents"
-        template="browser/folder_contents.pt"
-        layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
-        permission="cmf.ListFolderContents" 
+      for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+      class="pd.prenotazioni.browser.foldercontents.PrenotazioniFolderContentsView"
+      name="folder_contents"
+      template="browser/folder_contents.pt"
+      layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
+      permission="cmf.ListFolderContents"
     />
 
   </configure>
