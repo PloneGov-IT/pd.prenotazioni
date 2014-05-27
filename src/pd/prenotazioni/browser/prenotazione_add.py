@@ -112,7 +112,9 @@ class AddForm(BaseForm):
         if self.is_anonymous:
             return self.request.response.redirect(self.get_confirm_url(data))
         else:
-            return super(AddForm, self).action_book(action, data)
+            return super(AddForm, self).action_book.success_handler(self,
+                                                                    action,
+                                                                    data)
 
 
 class ConfirmForm(BaseForm):

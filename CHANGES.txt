@@ -2,9 +2,10 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.1.0 (unreleased)
 ------------------
 
+- Small modifications on pdf
 - Added a confirmation page for anonymous users.
   [alert]
 
