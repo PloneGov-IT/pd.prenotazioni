@@ -34,39 +34,41 @@ long_description = (
 
 tests_require = ['zope.testing']
 
-setup(name='pd.prenotazioni',
-      version=version,
-      description="PD Prenotazioni",
-      long_description=long_description,
-      # Get more strings from
-      # http://pypi.python.org/pypi?:action=list_classifiers
-      classifiers=[
+setup(
+    name='pd.prenotazioni',
+    version=version,
+    description="PD Prenotazioni",
+    long_description=long_description,
+    # Get more strings from
+    # http://pypi.python.org/pypi?:action=list_classifiers
+    classifiers=[
         'Framework :: Plone',
         'Intended Audience :: Developers',
-        ],
-      keywords='',
-      author='RedTurtle Technology',
-      author_email='sviluppoplone@redturtle.it',
-      url='http://svn.plone.org/svn/collective/',
-      license='gpl',
-      packages=find_packages('src'),
-      package_dir={'': 'src'},
-      namespace_packages=['pd'],
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=['setuptools',
-                        # -*- Extra requirements: -*-
-                        'pd.contentrules.sms',
-                        'plone.api',
-                        'rg.prenotazioni',
-                        'z3c.pdftemplate'
-                        ],
-      tests_require=tests_require,
-      extras_require=dict(test=tests_require),
-      test_suite='pd.prenotazioni.tests.test_docs.test_suite',
-      entry_points="""
+    ],
+    keywords='',
+    author='RedTurtle Technology',
+    author_email='sviluppoplone@redturtle.it',
+    url='http://svn.plone.org/svn/collective/',
+    license='gpl',
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    namespace_packages=['pd'],
+    include_package_data=True,
+    zip_safe=False,
+    install_requires=[
+        'setuptools',
+        # -*- Extra requirements: -*-
+        'pd.contentrules.sms',
+        'plone.api',
+        'rg.prenotazioni>=3.3.0.dev0',
+        'z3c.pdftemplate'
+    ],
+    tests_require=tests_require,
+    extras_require=dict(test=tests_require),
+    test_suite='pd.prenotazioni.tests.test_docs.test_suite',
+    entry_points="""
       # -*- entry_points -*-
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      )
+)
