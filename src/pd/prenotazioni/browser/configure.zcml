@@ -30,6 +30,14 @@
     permission="zope2.View"
   />
 
+  <browser:page
+    for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+    name="prenotazioni_search"
+    class=".prenotazioni_search.SearchForm"
+    layer=".interfaces.IPDPrenotazioniLayer"
+    permission="zope.Public"
+  />
+
   <configure package="rg.prenotazioni">
 
     <browser:page
