@@ -5,6 +5,7 @@ Changelog
 1.1.0 (unreleased)
 ------------------
 
+- Modified search results for prenotazioni
 - Small modifications on pdf
 - Added a confirmation page for anonymous users.
 - Readers can search bookings
