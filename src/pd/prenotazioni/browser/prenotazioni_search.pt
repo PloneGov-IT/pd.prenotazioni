@@ -146,6 +146,7 @@ i18n:domain="rg.prenotazioni">
                                   <th i18n:translate="label_gate">Gate</th>
                                   <th i18n:translate="reservation_date">Reservation date</th>
                                   <th i18n:translate="label_start_time">Start time</th>
+                                  <th>Tipologia</th>
                                   <th>Stato</th>
                                 </tr>
                               </thead>
@@ -164,6 +165,7 @@ i18n:domain="rg.prenotazioni">
                                     <td tal:content="python:item.getObject().getGate()"></td>
                                     <td tal:content="python:view.prenotazioni_week_view.localized_time(item['Date'])"></td>
                                     <td tal:content="python:view.prenotazioni_week_view.localized_time(item['Date'], time_only=True)"></td>
+                                    <td tal:content="python:item.getObject().getTipologia_prenotazione()"></td>
                                     <td tal:content="python:view.get_review_state_hr(item)"></td>
                                   </tr>
                                 </tal:block>
