@@ -20,7 +20,7 @@ class PatchedManageAssignments(ManageAssignments):
         form = request.form
 
         if not 'form.button.Delete' in form:
-            return super(PatchedManageAssignments, self).__call__(self)
+            return super(PatchedManageAssignments, self).__call__()
 
         context = aq_inner(self.context)
         assignable = IRuleAssignmentManager(context)
