@@ -122,8 +122,8 @@ class ConfirmForm(BaseForm):
     """
     template = ViewPageTemplateFile('prenotazione_confirm.pt')
     label = _(
-        'booking_confirmation',
-        u"Booking confirmation"
+        'booking_to_be_confirmed',
+        u"Prenotazione da confermare"
     )
     description = _(
         'booking_confirmation_help',
@@ -158,3 +158,13 @@ class ConfirmForm(BaseForm):
                 )
             )
         return ff
+
+    @action(_('action_confirm', u'Conferma'), name=u'book')
+    def action_book(self, action, data):
+        ''' Book this resource
+        '''
+        return (
+            super(ConfirmForm, self)
+            .action_book
+            .success_handler(self, action, data)
+        )

@@ -22,12 +22,16 @@ i18n:domain="plone">
             </dl>
           </tal:status>
           <h1 class="documentFirstHeading"
-              i18n:translate=""
-              tal:condition="view/label"
-              tal:content="view/label"
-              metal:define-slot="heading"
-          >Do something</h1>
-          <div class="documentDescription" tal:content="view/description|nothing">Description</div>
+              tal:condition="view/label">
+            <i class="icon-exclamation-sign" style="color:#900"></i>
+            <span class="documentFirstHeading"
+                i18n:translate=""
+                tal:replace="view/label"
+                metal:define-slot="heading"
+            >Do something</span>
+          </h1>
+          <div style="font-size:150%"
+               class="documentDescription" tal:content="view/description|nothing">Description</div>
           <div id="content-core">
             <form action="."
                   metal:define-macro="master"
