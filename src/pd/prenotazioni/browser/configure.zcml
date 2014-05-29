@@ -83,4 +83,12 @@
 
   </configure>
 
+  <browser:page
+    for="plone.contentrules.engine.interfaces.IRuleAssignable"
+    name="manage-content-rules"
+    class=".contentrules_patch.PatchedManageAssignments"
+    layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
+    permission="plone.app.contentrules.ManageContentRules"
+  />
+
 </configure>
