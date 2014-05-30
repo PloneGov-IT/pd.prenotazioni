@@ -2,6 +2,7 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from hashlib import md5
 from pd.prenotazioni import prenotazioniMessageFactory as _
+from plone.app.form.validators import null_validator
 from plone.memoize.view import memoize
 from rg.prenotazioni import prenotazioniMessageFactory as __
 from rg.prenotazioni.browser.prenotazione_add import AddForm as RGAddForm
@@ -116,6 +117,15 @@ class AddForm(BaseForm):
                                                                     action,
                                                                     data)
 
+    @action(__(u"action_cancel", default=u"Cancel"),
+            validator=null_validator, name=u'cancel')
+    def action_cancel(self, action, data):
+        '''
+        Cancel
+        '''
+        target = self.back_to_booking_url
+        return self.request.response.redirect(target)
+
 
 class ConfirmForm(BaseForm):
     """ The confirm form wants a checksum
@@ -168,3 +178,12 @@ class ConfirmForm(BaseForm):
             .action_book
             .success_handler(self, action, data)
         )
+
+    @action(__(u"action_cancel", default=u"Cancel"),
+            validator=null_validator, name=u'cancel')
+    def action_cancel(self, action, data):
+        '''
+        Cancel
+        '''
+        target = self.back_to_booking_url
+        return self.request.response.redirect(target)
