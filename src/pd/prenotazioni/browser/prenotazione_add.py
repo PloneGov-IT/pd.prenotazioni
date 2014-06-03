@@ -179,7 +179,7 @@ class ConfirmForm(BaseForm):
             .success_handler(self, action, data)
         )
 
-    @action(__(u"action_cancel", default=u"Cancel"),
+    @action(_(u"action_cancel", default=u"Annulla"),
             validator=null_validator, name=u'cancel')
     def action_cancel(self, action, data):
         '''
