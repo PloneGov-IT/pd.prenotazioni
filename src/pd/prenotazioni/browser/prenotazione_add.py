@@ -117,7 +117,7 @@ class AddForm(BaseForm):
                                                                     action,
                                                                     data)
 
-            @action(_(u"action_cancel", default=u"Annulla"),
+    @action(_(u"action_cancel", default=u"Annulla"),
             validator=null_validator, name=u'cancel')
     def action_cancel(self, action, data):
         '''
