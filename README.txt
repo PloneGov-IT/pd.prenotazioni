@@ -3,10 +3,9 @@
 Introduction
 ============
 
-PD Prenotazioni
+PD Prenotazioni::
 
-
-zope-conf-additional +=
+  zope-conf-additional +=
     <product-config pd.prenotazioni>
         logfile ${buildout:directory}/var/log/prenotazioni.log
     </product-config>
