@@ -22,7 +22,7 @@ long_description = (
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('src', 'pd', 'prenotazioni', 'README.txt')
+    read('pd', 'prenotazioni', 'README.txt')
     + '\n' +
     'Contributors\n'
     '************\n'
@@ -50,8 +50,7 @@ setup(
     author_email='sviluppoplone@redturtle.it',
     url='http://svn.plone.org/svn/collective/',
     license='gpl',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
+    packages=find_packages(exclude=['ez_setup']),
     namespace_packages=['pd'],
     include_package_data=True,
     zip_safe=False,
