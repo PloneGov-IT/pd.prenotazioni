@@ -8,12 +8,18 @@ from plone import api
 def prenotazione(context, **kw):
     ''' Reindex prenotazione
     '''
-    parts = [
+    parts = set((
         context.SearchableText(),
         context.REQUEST.form.get('cmfeditions_version_comment', ''),
-    ]
+    ))
     view = api.content.get_view('contenthistory', context, context.REQUEST)
     rh = view.revisionHistory()
-    parts.extend(item.get('comments', u'').encode('utf8') for item in rh[:-1])
+    for item in rh[:-1]:
+	comments = item.get('comments', '')
+	if comments:
+	    if isinstance(comments, unicode):
+                comments = comments.encode('utf8')
+	    parts.add(comments)
+
     searchable_text = " ".join(sorted(set(" ".join(parts).split())))
     return searchable_text
