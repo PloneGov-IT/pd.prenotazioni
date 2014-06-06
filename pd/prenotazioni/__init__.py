@@ -3,11 +3,10 @@
 from App.config import getConfiguration
 from Products.Archetypes import atapi
 from Products.CMFCore import utils
-from cgi import logfile
 from logging import getLogger, FileHandler, Formatter
 from pd.prenotazioni import config
-from zope.i18nmessageid import MessageFactory
 from rg.prenotazioni.content.prenotazione import PrenotazioneSchema
+from zope.i18nmessageid import MessageFactory
 
 
 prenotazioniMessageFactory = MessageFactory('pd.prenotazioni')
@@ -64,10 +63,14 @@ def initialize(context):
     # in the GenericSetup profile.
 
     for atype, constructor in zip(content_types, constructors):
-        utils.ContentInit('%s: %s' % (config.PROJECTNAME, atype.portal_type),
+        utils.ContentInit(
+            '%s: %s' % (
+                config.PROJECTNAME, atype.portal_type),
             content_types=(atype,),
             permission=config.ADD_PERMISSIONS[atype.portal_type],
             extra_constructors=(constructor,),
-            ).initialize(context)
-
+        ).initialize(context)
     PrenotazioneSchema['email'].required = False
+    PrenotazioneSchema['gate'].searchable = False
+    PrenotazioneSchema['location'].searchable = False
+    PrenotazioneSchema['subject'].searchable = False

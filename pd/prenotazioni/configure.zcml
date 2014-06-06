@@ -13,6 +13,7 @@
   <include package=".actions" />
   <include package=".browser" />
   <include package=".events" />
+  <include package=".indexers" />
   <include package=".portlets" />
   <include package=".upgrades" />
 
