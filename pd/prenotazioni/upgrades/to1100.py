@@ -37,3 +37,10 @@ def reindex_prenotazione_searchble_text(context):
             commit()
             logger.info('Progress %s/%s' % (done, total))
     logger.info("Reindexed SearchableText for inserzioni")
+
+    commit()
+    portal_setup = api.portal.get_tool('portal_setup')
+
+    logger.info('Registering %s resources' % PROJECTNAME)
+    portal_setup.runImportStepFromProfile(PROFILE_ID, 'cssregistry', run_dependencies=False)  # noqa
+    portal_setup.runImportStepFromProfile(PROFILE_ID, 'jsregistry', run_dependencies=False)  # noqa

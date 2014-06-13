@@ -12,7 +12,8 @@
 
   <genericsetup:upgradeStep
       title="Update to version 1100"
-      description="Prenotazioni searchable text contains comments"
+      description="Prenotazioni searchable text contains comments;
+                   register resources for tooltipster"
       source="*"
       destination="1100"
       handler=".to1100.reindex_prenotazione_searchble_text"

@@ -3,6 +3,7 @@
 ------------------
 
 - Index also revision history
+- Added Tooltipster
   [alert]
 
 
