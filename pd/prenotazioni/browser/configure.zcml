@@ -5,6 +5,11 @@
 
   <include package="plone.app.contentmenu" />
 
+  <browser:resourceDirectory
+    name="pd.prenotazioni"
+    directory="static"
+  />
+
   <browser:page
     for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
     name="prenotazione_add"
@@ -29,6 +34,14 @@
     class=".prenotazione_print_pdf.PrenotazionePrintPDF"
     permission="zope2.View"
   />
+
+  <browser:page
+    for="rg.prenotazioni.interfaces.IPrenotazione"
+    name="prenotazione_tooltip_view"
+    class="rg.prenotazioni.browser.prenotazione.PrenotazioneView"
+    template="prenotazione_tooltip.pt"
+    permission="zope2.View"
+    />
 
   <browser:page
     for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
