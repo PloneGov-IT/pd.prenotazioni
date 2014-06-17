@@ -15,11 +15,11 @@ def prenotazione(context, **kw):
     view = api.content.get_view('contenthistory', context, context.REQUEST)
     rh = view.revisionHistory()
     for item in rh[:-1]:
-	comments = item.get('comments', '')
-	if comments:
-	    if isinstance(comments, unicode):
+        comments = item.get('comments', '')
+        if comments:
+            if isinstance(comments, unicode):
                 comments = comments.encode('utf8')
-	    parts.add(comments)
+        parts.add(comments)
 
     searchable_text = " ".join(sorted(set(" ".join(parts).split())))
     return searchable_text
