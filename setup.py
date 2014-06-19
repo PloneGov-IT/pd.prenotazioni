@@ -19,16 +19,6 @@ long_description = (
     + '\n' +
     read('CHANGES.rst')
     + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('pd', 'prenotazioni', 'README.rst')
-    + '\n' +
-    'Contributors\n'
-    '************\n'
-    + '\n' +
-    read('CONTRIBUTORS.rst')
-    + '\n' +
     'Download\n'
     '********\n')
 
@@ -37,7 +27,9 @@ tests_require = ['zope.testing']
 setup(
     name='pd.prenotazioni',
     version=version,
-    description="PD Prenotazioni",
+    description=(
+        "pd.prenotazioni: a Plone product for booking"
+    ),
     long_description=long_description,
     # Get more strings from
     # http://pypi.python.org/pypi?:action=list_classifiers

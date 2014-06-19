@@ -2,7 +2,7 @@
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Documentation.
 
 
 1.1.0 (unreleased)
