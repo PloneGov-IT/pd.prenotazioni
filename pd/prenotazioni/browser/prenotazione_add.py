@@ -93,13 +93,18 @@ class AddForm(BaseForm):
         ''' The URL that send to the confirm form
         '''
         request_form = self.request.form
-        params = dict(
-            (key, request_form[key])
-            for key in request_form.keys()
-            if (key.startswith('form.')
-                and (not key.startswith('form.actions.')))
-        )
+        params = {}
+        for key in request_form.keys():
+            if (
+                key.startswith('form.')
+                and (not key.startswith('form.actions.'))
+            ):
+                value = request_form[key]
+                if isinstance(value, unicode):
+                    value = value.encode('utf8')
+                params[key] = value
         params["form.checksum"] = self.get_data_checksum(data)
+
         return urlify(
             self.context.absolute_url(),
             '@@prenotazione_confirm',

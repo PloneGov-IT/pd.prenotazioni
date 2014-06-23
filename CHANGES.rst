@@ -2,7 +2,7 @@
 1.1.1 (unreleased)
 ------------------
 
-- Documentation.
+- Fix encoding problem.
 
 
 1.1.0 (unreleased)
