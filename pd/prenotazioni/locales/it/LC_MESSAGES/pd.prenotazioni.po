@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2014-07-17 15:03+0000\n"
-"PO-Revision-Date: 2014-07-16 17:06+0200\n"
+"PO-Revision-Date: 2014-07-17 17:32+0200\n"
 "Last-Translator: Alessandro Pisa <alessandro.pisa@redturtle.it>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,9 @@ msgstr "Confermare"
 #. Default: "We assigned you a booking time. Please review your data before confirming your booking"
 #: ./browser/prenotazione_add.py:143
 msgid "booking_confirmation_help"
-msgstr "Ti è stata assegnato un orario per la prenotazione. Per favore verifica i tuoi dati prima di confermare la prenotazione"
+msgstr ""
+"Ti è stata assegnato un orario per la prenotazione. Per favore verifica i "
+"tuoi dati prima di confermare la prenotazione"
 
 #. Default: "Booking receipt"
 #: ./browser/prenotazione_print_pdf.py:11
@@ -54,7 +56,9 @@ msgstr "Codice di controllo errato"
 #. Default: "You have to provide at least one of these fields: email, phone, mobile"
 #: ./browser/prenotazione_add.py:80
 msgid "contact_details_error"
-msgstr "Devi specificare almeno un campo tra questi: Email, Numero di telefono, Numero di cellulare"
+msgstr ""
+"Devi specificare almeno un campo tra questi: Email, Numero di telefono, "
+"Numero di cellulare"
 
 #. Default: "States if it is not allowed to reserve a booking during the current day"
 #: ./extender.py:27
@@ -74,12 +78,12 @@ msgstr "Agenda non prenotabile giorno su giorno"
 #. Default: "No"
 #: ./browser/widgets/same_day_booking_disallowed.py:29
 msgid "no"
-msgstr ""
+msgstr "No"
 
 #. Default: "No, just for today"
 #: ./browser/widgets/same_day_booking_disallowed.py:30
 msgid "no_today"
-msgstr ""
+msgstr "No, solo per oggi"
 
 #. Default: "Verification code"
 #: ./browser/prenotazione_add.py:172
@@ -89,5 +93,6 @@ msgstr "Codice di controllo"
 #. Default: "Yes"
 #: ./browser/widgets/same_day_booking_disallowed.py:28
 msgid "yes"
-msgstr ""
+msgstr "Sì"
+
 
