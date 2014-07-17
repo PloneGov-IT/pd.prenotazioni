@@ -1,9 +1,10 @@
 
-1.1.2 (unreleased)
+1.2.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Requires rg.prenotazioni >= 3.5.0
+- Adds with an extender the capability to make reservation for the same day
+  [alert]
 
 1.1.1 (2014-06-23)
 ------------------

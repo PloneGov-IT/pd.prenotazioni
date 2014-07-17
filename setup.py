@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.1.2.dev0'
+version = '1.2.0.dev0'
 
 long_description = (
     read('README.rst')
@@ -51,7 +51,7 @@ setup(
         # -*- Extra requirements: -*-
         'pd.contentrules.sms',
         'plone.api',
-        'rg.prenotazioni>=3.3.0.dev0',
+        'rg.prenotazioni>=3.5.0.dev0',
         'z3c.pdftemplate'
     ],
     tests_require=tests_require,

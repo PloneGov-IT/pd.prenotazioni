@@ -14,6 +14,46 @@ This product is an extension that customizes `rg.prenotazioni`__
 __ https://pypi.python.org/pypi/rg.prenotazioni
 
 
+Booking folder content type
+---------------------------
+
+This package provides an extender to add
+the field "same_day_booking_disallowed".
+
+It has 3 possible states:
+    1. Yes
+    2. No
+    3. No, just for today
+
+If 1. is selected the default behaviour of
+`rg.prenotazioni`__
+is mantained: users cannot reserve a booking today.
+
+__ https://pypi.python.org/pypi/rg.prenotazioni
+
+Options 2. and 3. instead allow the reservation.
+
+prenotazioni_context_state
+--------------------------
+
+Extends the `rg.prenotazioni homonymous view`__ in order to override the
+minimum date since when it is possible to reserve a booking.
+
+Extends the `rg.prenotazioni homonymous view`__ in order to override
+the attribute ``add_view``.
+If a parameter called ``form.add_view`` is passed, it will be used
+as the add form for a booking object.
+
+We use this in combination with an apache rewrite rule that injects in the
+request the parameter with the value ``prenotazioni_add_ro``::
+
+    RewriteCond %{QUERY_STRING} !((.*)form_add_view=(.*))
+    RewriteRule ^/path_to_enable_custom_form/(.*) /notheme/$1?form.add_view=prenotazione_add_ro [QSA]
+
+__ https://github.com/PloneGov-IT/rg.prenotazioni/blob/master/rg/prenotazioni/browser/prenotazioni_context_state.py#L59
+
+
+
 Custom mail action
 ------------------
 

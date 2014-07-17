@@ -17,6 +17,22 @@
   <include package=".portlets" />
   <include package=".upgrades" />
 
+  <!-- Extend rg.prenotazioni content types -->
+  <include package="archetypes.schemaextender" />
+  <adapter
+    for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+    factory=".extender.PrenotazioniFolderSchemaExtender"
+    name="pd.prenotazioni.prenotazionifolder"
+    provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+  />
+
+  <adapter
+    for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
+    factory=".extender.PrenotazioniFolderSchemaExtender"
+    name="pd.prenotazioni.prenotazionifolder"
+    provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+  />
+
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"

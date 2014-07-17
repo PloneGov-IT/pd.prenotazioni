@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-05-20 08:56+0000\n"
+"POT-Creation-Date: 2014-07-16 15:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,13 +14,22 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#. Default: "Booking confirmation"
-#: ./browser/prenotazione_add.py:122
-msgid "booking_confirmation"
+#: ./browser/contentrules_patch.py:37
+msgid "Assignments deleted."
+msgstr ""
+
+#. Default: "Annulla"
+#: ./browser/prenotazione_add.py:125
+msgid "action_cancel"
+msgstr ""
+
+#. Default: "Conferma"
+#: ./browser/prenotazione_add.py:177
+msgid "action_confirm"
 msgstr ""
 
 #. Default: "We assigned you a booking time. Please review your data before confirming your booking"
-#: ./browser/prenotazione_add.py:126
+#: ./browser/prenotazione_add.py:143
 msgid "booking_confirmation_help"
 msgstr ""
 
@@ -29,23 +38,53 @@ msgstr ""
 msgid "booking_receipt"
 msgstr ""
 
-#. Default: "Invalid checksum"
+#. Default: "Prenotazione da confermare"
 #: ./browser/prenotazione_add.py:139
+msgid "booking_to_be_confirmed"
+msgstr ""
+
+#. Default: "Invalid checksum"
+#: ./browser/prenotazione_add.py:156
 msgid "checksum_error"
 msgstr ""
 
 #. Default: "You have to provide at least one of these fields: email, phone, mobile"
-#: ./browser/prenotazione_add.py:79
+#: ./browser/prenotazione_add.py:80
 msgid "contact_details_error"
 msgstr ""
 
+#. Default: "States if it is not allowed to reserve a booking during the current day"
+#: ./extender.py:27
+msgid "help_same_day_booking_disallowed"
+msgstr ""
+
 #. Default: "Mobile phone number not valid"
-#: ./browser/prenotazione_add.py:17
+#: ./browser/prenotazione_add.py:18
 msgid "invalid_mobile_number"
 msgstr ""
 
+#. Default: "Same day booking disallowed"
+#: ./extender.py:23
+msgid "label_same_day_booking_disallowed"
+msgstr ""
+
+#. Default: "No"
+#: ./browser/widgets/same_day_booking_disallowed.py:29
+msgid "no"
+msgstr ""
+
+#. Default: "No, just for today"
+#: ./browser/widgets/same_day_booking_disallowed.py:30
+msgid "no_today"
+msgstr ""
+
 #. Default: "Verification code"
-#: ./browser/prenotazione_add.py:155
+#: ./browser/prenotazione_add.py:172
 msgid "verification_code"
+msgstr ""
+
+#. Default: "Yes"
+#: ./browser/widgets/same_day_booking_disallowed.py:28
+msgid "yes"
 msgstr ""
 
