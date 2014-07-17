@@ -2,7 +2,7 @@
 from Products.Five.browser import BrowserView
 from datetime import date
 from plone.memoize.view import memoize
-from rg.prenotazioni import prenotazioniMessageFactory as _
+from pd.prenotazioni import prenotazioniMessageFactory as _
 try:
     from collections import OrderedDict
 except ImportError:
