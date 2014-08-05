@@ -17,17 +17,29 @@ __ https://pypi.python.org/pypi/rg.prenotazioni
 Booking folder content type
 ---------------------------
 
-This package provides an extender to add
-the field "same_day_booking_disallowed".
+This package provides an extender to add the fields:
+    1. required_booking_fields
+    2. same_day_booking_disallowed
 
-It has 3 possible states:
+The field "required_booking_fields" allows to specify which of the fields:
+    - email
+    - mobile
+    - phone
+    - subject
+    - agency
+
+should be mandatory for a booking request to be accepted.
+In any case at least one between email, mobile and phone
+should be given at booking time.
+
+The field "same_day_booking_disallowed" has 3 possible states:
     1. Yes
     2. No
     3. No, just for today
 
-If 1. is selected the default behaviour of
+If 1. is selected the default behavior of
 `rg.prenotazioni`__
-is mantained: users cannot reserve a booking today.
+is maintained: users cannot reserve a booking today.
 
 __ https://pypi.python.org/pypi/rg.prenotazioni
 
@@ -38,6 +50,8 @@ prenotazioni_context_state
 
 Extends the `rg.prenotazioni homonymous view`__ in order to override the
 minimum date since when it is possible to reserve a booking.
+
+__ https://github.com/PloneGov-IT/rg.prenotazioni/blob/master/rg/prenotazioni/browser/prenotazioni_context_state.py#L59
 
 Extends the `rg.prenotazioni homonymous view`__ in order to override
 the attribute ``add_view``.
@@ -51,7 +65,6 @@ request the parameter with the value ``prenotazioni_add_ro``::
     RewriteRule ^/path_to_enable_custom_form/(.*) /notheme/$1?form.add_view=prenotazione_add_ro [QSA]
 
 __ https://github.com/PloneGov-IT/rg.prenotazioni/blob/master/rg/prenotazioni/browser/prenotazioni_context_state.py#L59
-
 
 
 Custom mail action
@@ -106,7 +119,7 @@ The product removes from the booking searchable text those fields:
 Popup with tooltipster
 ----------------------
 
-The product adds to the agenda some popups using the library `tooltipster`__
+The product adds to the agenda some pop-ups using the library `tooltipster`__
 
 __ http://iamceege.github.io/tooltipster/
 
