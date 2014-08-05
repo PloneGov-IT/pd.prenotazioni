@@ -4,6 +4,8 @@
 
 - Requires rg.prenotazioni >= 3.5.0
 - Adds with an extender the capability to make reservation for the same day
+- Adds with an extender the capability to specify the fields required
+  at booking time
   [alert]
 
 1.1.1 (2014-06-23)
