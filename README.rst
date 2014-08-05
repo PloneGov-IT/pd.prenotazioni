@@ -18,24 +18,27 @@ Booking folder content type
 ---------------------------
 
 This package provides an extender to add the fields:
-    1. required_booking_fields
-    2. same_day_booking_disallowed
+
+1. required_booking_fields
+2. same_day_booking_disallowed
 
 The field "required_booking_fields" allows to specify which of the fields:
-    - email
-    - mobile
-    - phone
-    - subject
-    - agency
+
+- email
+- mobile
+- phone
+- subject
+- agency
 
 should be mandatory for a booking request to be accepted.
 In any case at least one between email, mobile and phone
 should be given at booking time.
 
 The field "same_day_booking_disallowed" has 3 possible states:
-    1. Yes
-    2. No
-    3. No, just for today
+    
+1. Yes
+2. No
+3. No, just for today
 
 If 1. is selected the default behavior of
 `rg.prenotazioni`__
