@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2014-07-17 15:03+0000\n"
-"PO-Revision-Date: 2014-07-17 17:32+0200\n"
+"POT-Creation-Date: 2014-08-05 14:37+0000\n"
+"PO-Revision-Date: 2014-08-05 16:42+0200\n"
 "Last-Translator: Alessandro Pisa <alessandro.pisa@redturtle.it>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,17 +22,17 @@ msgid "Assignments deleted."
 msgstr ""
 
 #. Default: "Annulla"
-#: ./browser/prenotazione_add.py:125
+#: ./browser/prenotazione_add.py:127
 msgid "action_cancel"
 msgstr "Annulla"
 
 #. Default: "Conferma"
-#: ./browser/prenotazione_add.py:177
+#: ./browser/prenotazione_add.py:179
 msgid "action_confirm"
 msgstr "Confermare"
 
 #. Default: "We assigned you a booking time. Please review your data before confirming your booking"
-#: ./browser/prenotazione_add.py:143
+#: ./browser/prenotazione_add.py:145
 msgid "booking_confirmation_help"
 msgstr ""
 "Ti è stata assegnato un orario per la prenotazione. Per favore verifica i "
@@ -44,24 +44,33 @@ msgid "booking_receipt"
 msgstr "Ricevuta della prenotazione"
 
 #. Default: "Prenotazione da confermare"
-#: ./browser/prenotazione_add.py:139
+#: ./browser/prenotazione_add.py:141
 msgid "booking_to_be_confirmed"
 msgstr "Prenotazione da confermare"
 
 #. Default: "Invalid checksum"
-#: ./browser/prenotazione_add.py:156
+#: ./browser/prenotazione_add.py:158
 msgid "checksum_error"
 msgstr "Codice di controllo errato"
 
 #. Default: "You have to provide at least one of these fields: email, phone, mobile"
-#: ./browser/prenotazione_add.py:80
+#: ./browser/prenotazione_add.py:82
 msgid "contact_details_error"
 msgstr ""
 "Devi specificare almeno un campo tra questi: Email, Numero di telefono, "
 "Numero di cellulare"
 
+#. Default: "User will not be able to add a booking unless those fields are filled. Remember that, whatever you selected in this list, users have to supply at least one of \"Email\", \"Mobile\", or \"Telephone\""
+#: ./extender.py:38
+msgid "help_required_booking_fields"
+msgstr ""
+"Gli utenti non potranno prenotare se non compileranno i campi indicati. "
+"Ricorda che, qualunque sia la tua scelta, almeno uno dei campi \"Email\", "
+"\"Numero di cellulare\", or \"Numero di telefono\" deve essere compilato in "
+"fase di prenotazione."
+
 #. Default: "States if it is not allowed to reserve a booking during the current day"
-#: ./extender.py:27
+#: ./extender.py:64
 msgid "help_same_day_booking_disallowed"
 msgstr "Stabilisce se è vietata la prenotazione per il giorno stesso"
 
@@ -70,8 +79,13 @@ msgstr "Stabilisce se è vietata la prenotazione per il giorno stesso"
 msgid "invalid_mobile_number"
 msgstr "Numero non valido"
 
+#. Default: "Required booking fields"
+#: ./extender.py:34
+msgid "label_required_booking_fields"
+msgstr "Campi richiesti in fase di prenotazione"
+
 #. Default: "Same day booking disallowed"
-#: ./extender.py:23
+#: ./extender.py:60
 msgid "label_same_day_booking_disallowed"
 msgstr "Agenda non prenotabile giorno su giorno"
 
@@ -86,7 +100,7 @@ msgid "no_today"
 msgstr "No, solo per oggi"
 
 #. Default: "Verification code"
-#: ./browser/prenotazione_add.py:172
+#: ./browser/prenotazione_add.py:174
 msgid "verification_code"
 msgstr "Codice di controllo"
 
