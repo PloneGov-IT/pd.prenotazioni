@@ -23,6 +23,15 @@ class PDPrenotazioniContextState(PrenotazioniContextState):
 
     @property
     @memoize
+    def required_booking_fields(self):
+        ''' Required booking field property that proxies the context one
+        '''
+        field = self.context.getField('required_booking_fields')
+        value = field.get(self.context)
+        return value
+
+    @property
+    @memoize
     def same_day_booking_allowed(self):
         ''' State if the same day booking is allowed
         '''

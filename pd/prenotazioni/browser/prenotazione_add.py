@@ -69,6 +69,8 @@ class BaseForm(RGAddForm):
         ff = super(BaseForm, self).form_fields
         ff['email'].field.required = False
         ff['mobile'].field.constraint = check_mobile_number
+        for field in self.prenotazioni.required_booking_fields:
+            ff[field].field.required = True
         return ff
 
     def validate(self, action, data):

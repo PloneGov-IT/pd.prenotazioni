@@ -16,6 +16,7 @@
   <include package=".indexers" />
   <include package=".portlets" />
   <include package=".upgrades" />
+  <include package=".vocs" />
 
   <!-- Extend rg.prenotazioni content types -->
   <include package="archetypes.schemaextender" />
