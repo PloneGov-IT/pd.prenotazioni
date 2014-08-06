@@ -23,7 +23,7 @@ class ExtensionLinesField(ExtensionField, LinesField):
 
 class PrenotazioniFolderSchemaExtender(object):
 
-    """ extender for cream visore
+    """ extender for prenotazioni
     """
 
     fields = [
