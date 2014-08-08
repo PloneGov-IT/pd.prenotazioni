@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+metal:use-macro="context/main_template/macros/master"
+i18n:domain="pd.prenotazioni">
+  <head></head>
+  <body>
+    <metal:main fill-slot="main"
+                tal:define="sorted_entries view/sorted_entries;"
+                >
+      <div tal:condition="sorted_entries">
+        <tal:batch
+            define="Batch python:modules['Products.CMFPlone'].Batch;
+                    b_size python:10;
+                    b_start python:0;
+                    b_start request/b_start | b_start;
+                    batch_base_url string:${here/absolute_url}/${view/__name__};
+                    batch python:Batch(sorted_entries, b_size, int(b_start));">
+            <table class="listing collection-listing"
+                   summary="Content listing"
+                   i18n:attributes="summary">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Note</th>
+                  <th>Date</th>
+                  <th>Agenda</th>
+                  <th>Booking</th>
+                  <th>User</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colspan="6">
+                    <a href=""
+                       tal:attributes="href view/csv_url">
+                      Download as CSV
+                      <i class="icon-save"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tal:block tal:repeat="entry batch">
+                  <tr tal:define="oddrow repeat/entry/odd;
+                                  item python:view.expand_entry(entry)"
+                      tal:attributes="class python:oddrow and 'even' or 'odd'" >
+                    <td tal:content="item/action"></td>
+                    <td tal:content="item/note"></td>
+                    <td tal:content="item/date"></td>
+                    <td tal:define="urlobj item/agenda">
+                      <a href=""
+                         tal:attributes="href urlobj/url"
+                         tal:omit-tag="not:urlobj/url"
+                         tal:content="urlobj/title" />
+                    </td>
+                    <td tal:define="urlobj item/booking">
+                      <a href=""
+                         tal:attributes="href urlobj/url"
+                         tal:omit-tag="not:urlobj/url"
+                         tal:content="urlobj/title" />
+                    </td>
+                    <td tal:content="item/user"></td>
+                  </tr>
+                </tal:block>
+              </tbody>
+            </table>
+          <div metal:use-macro="here/batch_macros/macros/navigation" />
+        </tal:batch>
+      </div>
+
+      <div tal:condition="not:sorted_entries" i18n:translate="">
+        Statistics are not available
+      </div>
+    </metal:main>
+  </body>
+</html>

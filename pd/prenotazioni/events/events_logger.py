@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
-from pd.prenotazioni import prenotazioniFileLogger as logger
 from plone import api
-import StringIO
-import csv
-import json
+from time import time
+from json import dumps
 
 
-def csv2string(data):
+def log_data_for_booking(obj, data):
+    ''' Log the given data for a booking
     '''
-    Converts an array of info to a proper cvs string
-    '''
-    dummy_file = StringIO.StringIO()
-    cw = csv.writer(dummy_file)
-    cw.writerow(data)
-    return dummy_file.getvalue().strip('\r\n')
+    prenotazioni_folder = obj.getPrenotazioniFolder()
+    user = api.user.get_current()
+    booking_stats = api.content.get_view(
+        'booking_stats',
+        prenotazioni_folder,
+        prenotazioni_folder.REQUEST
+    )
+    data.extend([
+        time(),
+        prenotazioni_folder.UID(),
+        obj.UID(),
+        obj.Title(),
+        user.getId(),
+    ])
+    booking_stats.csvlog(data)
 
 
 def on_workflow_change(obj, event):
@@ -21,9 +29,11 @@ def on_workflow_change(obj, event):
     This handler logs a cvs string for
     each IPrenotazione workflow changes
     '''
-    user = api.user.get_current()
-    data = [obj.UID(), obj.Title(), user.getId(), event.action]
-    logger.info(csv2string(data))
+    data = [
+        event.action,
+        ''
+    ]
+    log_data_for_booking(obj, data)
 
 
 def on_move(obj, event):
@@ -31,9 +41,11 @@ def on_move(obj, event):
     This handler logs a cvs string for
     every IPrenotazione document moved
     '''
-    user = api.user.get_current()
-    data = [obj.UID(), obj.Title(), user.getId(), 'moved']
-    logger.info(csv2string(data))
+    data = [
+        'moved',
+        ''
+    ]
+    log_data_for_booking(obj, data)
 
 
 def on_modify(obj, event):
@@ -41,15 +53,22 @@ def on_modify(obj, event):
     This handler logs a cvs string for
     every IPrenotazione document modified
     '''
-
     old_version = getattr(obj, 'version_id', 0) - 1
     if old_version < 0:
         return
 
     # Below a list of fields to be logged to
-    fnames = ['title', 'description', 'email', 'telefono', 'mobile',
-              'tipologia_prenotazione', 'azienda', 'gate']
-
+    fnames = [
+        'azienda',
+        'description',
+        'email',
+        'gate',
+        'mobile',
+        'staff_notes',
+        'telefono',
+        'tipologia_prenotazione',
+        'title',
+    ]
     pr = api.portal.get_tool(name='portal_repository')
     old = pr.retrieve(obj, old_version).object
     changes = []
@@ -60,7 +79,8 @@ def on_modify(obj, event):
             changes.append({'new_' + fname: c_value,
                             'old_' + fname: o_value})
 
-    user = api.user.get_current()
-    data = [obj.UID(), obj.Title(), user.getId(), 'changed',
-            json.dumps(changes)]
-    logger.info(csv2string(data))
+    data = [
+        'changed',
+        dumps(changes)
+    ]
+    log_data_for_booking(obj, data)
