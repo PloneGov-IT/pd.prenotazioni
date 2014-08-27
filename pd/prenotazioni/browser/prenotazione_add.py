@@ -67,10 +67,13 @@ class BaseForm(RGAddForm):
         This method adds mobile number validation to prenotazioni form
         '''
         ff = super(BaseForm, self).form_fields
-        ff['email'].field.required = False
         ff['mobile'].field.constraint = check_mobile_number
-        for field in self.prenotazioni.required_booking_fields:
-            ff[field].field.required = True
+        # setting required fields according to what is selected
+        # in the booking folder
+        required_fields = self.prenotazioni.required_booking_fields
+        for form_field in ff:
+            field = form_field.field
+            field.required = bool(field.__name__ in required_fields)
         return ff
 
     def validate(self, action, data):
