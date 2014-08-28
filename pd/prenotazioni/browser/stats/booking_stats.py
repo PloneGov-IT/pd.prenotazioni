@@ -56,11 +56,13 @@ class IQueryForm(Interface):
     )
 
 
-def date2timestamp(value):
+def date2timestamp(value, delta=0):
     ''' Conerts a date in the format "%Y-%m-%d" to a unix timestamp
     '''
     try:
-        return mktime(datetime.strptime(value, "%Y-%m-%d").timetuple())
+        value = datetime.strptime(value, "%Y-%m-%d")
+        value = value + timedelta(delta)
+        return mktime(value.timetuple())
     except Exception as e:
         logger.exception(value)
         raise(e)
@@ -100,7 +102,7 @@ class BaseForm(PageForm):
         """
         value = self.request.form.get('form.end', '2037-11-20')
         try:
-            return date2timestamp(value)
+            return date2timestamp(value, delta=1)
         except:
             return 9999999999.0
 
