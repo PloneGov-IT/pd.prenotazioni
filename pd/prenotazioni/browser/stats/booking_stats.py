@@ -1,24 +1,80 @@
 # -*- coding: utf-8 -*-
 from BTrees.OOBTree import OOTreeSet
-from Products.Five.browser import BrowserView
-from datetime import datetime
-from plone.memoize.view import memoize
-from plone import api
-from pd.prenotazioni import prenotazioniFileLogger
-from rg.prenotazioni.browser.base import BaseView as PrenotazioniBaseView
-from rg.prenotazioni.interfaces import IPrenotazioniFolder
-from zope.annotation.interfaces import IAnnotations
-from json import dumps, loads
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from cStringIO import StringIO
 from csv import writer
+from datetime import date, datetime, timedelta
+from five.formlib.formbase import PageForm
+from json import dumps, loads
+from pd.prenotazioni import prenotazioniFileLogger
+from pd.prenotazioni import prenotazioniLogger as logger
+from pd.prenotazioni import prenotazioniMessageFactory as _
+from plone import api
+from plone.app.form.validators import null_validator
+from plone.memoize.view import memoize
+from plone.memoize.view import memoize_contextless
+from rg.prenotazioni.browser.base import BaseView as PrenotazioniBaseView
+from rg.prenotazioni.interfaces import IPrenotazioniFolder
+from rg.prenotazioni.utilities.urls import urlify
+from time import mktime
+from zope.annotation.interfaces import IAnnotations
+from zope.formlib.form import FormFields, action, setUpWidgets
+from zope.interface import implementer, Interface
+from zope.schema import Date, ValidationError
 
 
-class BaseView(BrowserView):
+class InvalidDate(ValidationError):
+    __doc__ = _('invalid_end:search_date', u"Invalid start or end date")
+
+
+def check_date(value):
+    '''
+    Check if the input date is correct
+    '''
+    if isinstance(value, date):
+        return True
+    raise InvalidDate
+
+
+class IQueryForm(Interface):
+    """
+    Interface for querying stuff
+    """
+    start = Date(
+        title=_('label_start', u'Start date '),
+        description=_(" format (YYYY-MM-DD)"),
+        default=None,
+        constraint=check_date,
+        required=False,
+    )
+    end = Date(
+        title=_('label_end', u'End date'),
+        description=_(" format (YYYY-MM-DD)"),
+        default=None,
+        constraint=check_date,
+        required=False,
+    )
+
+
+def date2timestamp(value):
+    ''' Conerts a date in the format "%Y-%m-%d" to a unix timestamp
+    '''
+    try:
+        return mktime(datetime.strptime(value, "%Y-%m-%d").timetuple())
+    except Exception as e:
+        logger.exception(value)
+        raise(e)
+
+
+@implementer(IQueryForm)
+class BaseForm(PageForm):
     ''' The base class for this context
     '''
+    resetForm = False
     entry_set = set([])
     # entry indexes:
     _ei_date = 2
+    template = ViewPageTemplateFile('booking_stats.pt')
 
     def set_header(self, *args):
         '''
@@ -27,11 +83,139 @@ class BaseView(BrowserView):
         return self.request.RESPONSE.setHeader(*args)
 
     @property
+    @memoize_contextless
+    def start_timestamp(self):
+        """ Returns the timestamp of the parameter in the request
+        """
+        value = self.request.form.get('form.start', '1970-01-01')
+        try:
+            return date2timestamp(value)
+        except:
+            return 0
+
+    @property
+    @memoize_contextless
+    def end_timestamp(self):
+        """ Returns the timestamp of the parameter in the request
+        """
+        value = self.request.form.get('form.end', '2037-11-20')
+        try:
+            return date2timestamp(value)
+        except:
+            return 9999999999.0
+
+    @property
+    @memoize
+    def form_fields(self):
+        '''
+        The fields for this form
+        '''
+        ff = FormFields(IQueryForm)
+        return ff
+
+    @property
+    @memoize
+    def booking_stats(self):
+        ''' Return the booking_stats view
+        '''
+        return api.content.get_view(
+            'booking_stats',
+            self.context,
+            self.request,
+        )
+
+    def redirect(self, target="", message="", message_type="info"):
+        """ Redirect to target or context
+        """
+        if not target:
+            target = self.context.absolute_url()
+        if message:
+            api.portal.show_message(
+                message=message,
+                request=self.request,
+                type=message_type
+            )
+        return self.request.response.redirect(target)
+
+    def setUpWidgets(self, ignore_request=False):
+        '''
+        From zope.formlib.form.Formbase.
+        '''
+        self.adapters = {}
+        ff = self.form_fields
+        fieldnames = [x.__name__ for x in ff]
+        data = {}
+        for key in fieldnames:
+            form_value = self.request.form.get(key)
+            if form_value is not None and not form_value == u'':
+                data[key] = form_value
+                self.request[key] = form_value
+
+        today = date.today()
+        if not ff['start'].field.default:
+            ff['start'].field.default = (today - timedelta(365))
+        if not ff['end'].field.default:
+            ff['end'].field.default = (today)
+
+        self.widgets = setUpWidgets(
+            ff,
+            self.prefix,
+            self.context,
+            self.request,
+            form=self,
+            adapters=self.adapters,
+            ignore_request=ignore_request,
+            data=data
+        )
+
+    def do_search(self, data):
+        ''' Actually execute stuff
+        '''
+        return self.template()
+
+    @action(_('action_search', u'Search'), name=u'search')
+    def action_search(self, action, data):
+        '''
+        Do something
+        '''
+        return self.do_search(data)
+
+    @action(_('action_csv', u'CSV'), name=u'csv')
+    def action_csv(self, action, data):
+        '''
+        Do something
+        '''
+        return self.get_csv()
+
+    @action(_(u"action_cancel", u"Cancel"), validator=null_validator, name=u'cancel')  # noqa
+    def action_cancel(self, action, data):
+        '''
+        Cancel
+        '''
+        target = self.context.absolute_url()
+        return self.redirect(target)
+
+    def extra_script(self):
+        ''' The scripts needed for the dateinput
+        '''
+        view = api.content.get_view(
+            'rg.prenotazioni.dateinput.conf.js',
+            self.context,
+            self.request,
+        )
+        return view.render() + view.mark_with_class([r'#form\\.start', r'#form\\.end', ])  # noqa
+
+    @property
     @memoize
     def csv_url(self):
         ''' The CSV url to get those data
         '''
-        return '%s/%s.csv' % (self.context.absolute_url(), self.__name__)
+        params = {
+            'form.actions.csv': 1,
+            'form.start': self.request.form['form.start'],
+            'form.end': self.request.form['form.end']
+        }
+        return urlify(self.context.absolute_url(), [self.__name__], params)
 
     @property
     @memoize
@@ -140,7 +324,7 @@ class BaseView(BrowserView):
         return self.csvencode(self.load_entries())
 
 
-class ContextView(BaseView, PrenotazioniBaseView):
+class ContextForm(BaseForm, PrenotazioniBaseView):
     '''
     Aggregates data from the booking folders below
     '''
@@ -173,11 +357,19 @@ class ContextView(BaseView, PrenotazioniBaseView):
     @property
     @memoize
     def entry_set(self):
-        ''' All the entries saved in this object
+        ''' All the entries saved in this object in the given time range
         '''
         if not self.prenotazioni.user_can_manage:
             return set([])
-        return set(self.logstorage)
+        values = set(self.logstorage)
+        if not values:
+            return set([])
+        start = self.start_timestamp
+        end = self.end_timestamp
+        return set(
+            x for x in self.logstorage
+            if start < loads(x)[self._ei_date] < end
+        )
 
     def csvlog(self, data):
         ''' Log something, dumping it on a file and storing it in the
@@ -187,7 +379,7 @@ class ContextView(BaseView, PrenotazioniBaseView):
         self.add_entry(dumps(data))
 
 
-class AggregateView(BaseView):
+class AggregateForm(BaseForm):
     ''' The Base View to get the statistics for this site
     '''
     prenotazioni_interfaces = [

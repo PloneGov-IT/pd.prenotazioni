@@ -11,7 +11,7 @@
   -->
   <browser:pages
     for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
-    class=".booking_stats.ContextView"
+    class=".booking_stats.ContextForm"
     permission="zope2.View">
     <browser:page name="booking_stats" template="booking_stats.pt" />
     <browser:page name="booking_stats.csv" attribute="get_csv" />
@@ -21,7 +21,7 @@
 
   <browser:pages
     for="*"
-    class=".booking_stats.AggregateView"
+    class=".booking_stats.AggregateForm"
     permission="zope2.View">
     <browser:page name="booking_stats" template="booking_stats.pt" />
     <browser:page name="booking_stats.csv" attribute="get_csv" />

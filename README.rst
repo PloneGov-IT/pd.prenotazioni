@@ -109,16 +109,16 @@ Event log views
 ---------------
 
 The logged events can also be viewed online
-using thew ``booking_stats`` view.
+using thew ``booking_stats`` form.
 
-The view displays to the user the data of the agendas he can manage
+The form displays to the user the data of the agendas he can manage
 contained under the context path.
 
 Calling this view on the root of the Plone site return data from all
 the manageable agendas.
 
-The view displays data in a table and provide a link for downloading
-the logged events in a csv file.
+The view displays data in a table and provides a link and an action
+for downloading the logged events in a csv file.
 
 Customized Searchable text
 --------------------------
