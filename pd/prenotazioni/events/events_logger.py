@@ -19,7 +19,7 @@ def log_data_for_booking(obj, data):
         prenotazioni_folder.UID(),
         obj.UID(),
         obj.Title(),
-        user.getId(),
+        user.getId() or 'anonymous',
     ])
     booking_stats.csvlog(data)
 
