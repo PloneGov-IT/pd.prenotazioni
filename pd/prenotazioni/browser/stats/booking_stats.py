@@ -301,16 +301,20 @@ class BaseForm(PageForm):
             results.setdefault(entry[self._ei_action], []).append(entry)
         return results
 
-    def csvencode(self, data):
+    def csvencode(self, data, human_readable=False):
         '''
         Converts an array of info to a proper cvs string
+
+        If human_readable is set to True it will convert
+        timestamps and uids
         '''
         dummy_file = StringIO()
         cw = writer(dummy_file)
         for line in data:
-            line[self._ei_date] = timestamp2date(line[self._ei_date])
-            line[3] = self.uid_to_url(line[3])
-            line[4] = self.uid_to_url(line[4])
+            if human_readable:
+                line[self._ei_date] = timestamp2date(line[self._ei_date])
+                line[3] = self.uid_to_url(line[3])
+                line[4] = self.uid_to_url(line[4])
             cw.writerow(line)
         return dummy_file.getvalue().strip('\r\n')
 
@@ -346,7 +350,7 @@ class BaseForm(PageForm):
             'Content-Disposition',
             'attachment;filename=%s' % self.csv_filename
         )
-        return self.csvencode(self.load_entries())
+        return self.csvencode(self.load_entries(), human_readable=True)
 
 
 class ContextForm(BaseForm, PrenotazioniBaseView):
