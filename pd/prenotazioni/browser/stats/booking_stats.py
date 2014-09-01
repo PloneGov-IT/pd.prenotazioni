@@ -234,7 +234,8 @@ class BaseForm(PageForm):
         params = {
             'form.actions.csv': 1,
             'form.start': self.request.form['form.start'],
-            'form.end': self.request.form['form.end']
+            'form.end': self.request.form['form.end'],
+            'form.user': self.request.form['form.user'],
         }
         return urlify(self.context.absolute_url(), [self.__name__], params)
 
