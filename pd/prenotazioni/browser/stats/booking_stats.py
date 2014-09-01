@@ -20,7 +20,7 @@ from time import mktime
 from zope.annotation.interfaces import IAnnotations
 from zope.formlib.form import FormFields, action, setUpWidgets
 from zope.interface import implementer, Interface
-from zope.schema import Date, ValidationError
+from zope.schema import Date, TextLine, ValidationError
 
 
 class InvalidDate(ValidationError):
@@ -40,6 +40,11 @@ class IQueryForm(Interface):
     """
     Interface for querying stuff
     """
+    user = TextLine(
+        title=_(u'label_user', "User"),
+        default=u'',
+        required=False
+    )
     start = Date(
         title=_('label_start', u'Start date '),
         description=_(" format (YYYY-MM-DD)"),
@@ -68,6 +73,12 @@ def date2timestamp(value, delta=0):
         raise(e)
 
 
+def timestamp2date(value, date_format='%Y/%m/%d %H:%M'):
+    ''' Converts a timestamp to date_format
+    '''
+    return datetime.fromtimestamp(value).strftime(date_format)
+
+
 @implementer(IQueryForm)
 class BaseForm(PageForm):
     ''' The base class for this context
@@ -75,7 +86,9 @@ class BaseForm(PageForm):
     resetForm = False
     entry_set = set([])
     # entry indexes:
+    _ei_action = 0
     _ei_date = 2
+    _ei_user = 6
     template = ViewPageTemplateFile('booking_stats.pt')
 
     def set_header(self, *args):
@@ -105,6 +118,12 @@ class BaseForm(PageForm):
             return date2timestamp(value, delta=1)
         except:
             return 9999999999.0
+
+    @property
+    def user(self):
+        """ Returns the user parameter in the request
+        """
+        return self.request.form.get('form.user', '')
 
     @property
     @memoize
@@ -229,7 +248,7 @@ class BaseForm(PageForm):
             datetime.now().strftime('%Y%m%d%H%M')
         )
 
-    @memoize
+    @memoize_contextless
     def uid_to_url(self, uid):
         ''' Converts a uid to an url
         '''
@@ -278,17 +297,19 @@ class BaseForm(PageForm):
         results = {}
         entries = self.load_entries()
         for entry in entries:
-            results.setdefault(entry[0], []).append(entry)
+            results.setdefault(entry[self._ei_action], []).append(entry)
         return results
 
-    @staticmethod
-    def csvencode(data):
+    def csvencode(self, data):
         '''
         Converts an array of info to a proper cvs string
         '''
         dummy_file = StringIO()
         cw = writer(dummy_file)
         for line in data:
+            line[self._ei_date] = timestamp2date(line[self._ei_date])
+            line[3] = self.uid_to_url(line[3])
+            line[4] = self.uid_to_url(line[4])
             cw.writerow(line)
         return dummy_file.getvalue().strip('\r\n')
 
@@ -302,15 +323,16 @@ class BaseForm(PageForm):
     def expand_entry(self, entry):
         ''' Expand an entry
         '''
-        data = loads(entry)
+        if isinstance(entry, basestring):
+            entry = loads(entry)
         return {
-            'action': data[0],
-            'note': data[1],
-            'date': datetime.fromtimestamp(data[self._ei_date]).strftime('%Y/%m/%d %H:%M'),  # noqa
-            'agenda': self.uid_to_url(data[3]),
-            'booking': self.uid_to_url(data[4]),
-            'fullname': data[5],
-            'user': data[6],
+            'action': entry[self._ei_action],
+            'note': entry[1],
+            'date': timestamp2date(entry[self._ei_date]),
+            'agenda': self.uid_to_url(entry[3]),
+            'booking': self.uid_to_url(entry[4]),
+            'fullname': entry[5],
+            'user': entry[self._ei_user],
         }
 
     def get_csv(self):
@@ -368,9 +390,14 @@ class ContextForm(BaseForm, PrenotazioniBaseView):
             return set([])
         start = self.start_timestamp
         end = self.end_timestamp
+        user = self.user
+        entries = map(loads, self.logstorage)
         return set(
-            x for x in self.logstorage
-            if start < loads(x)[self._ei_date] < end
+            dumps(x) for x in entries
+            if (
+                start < x[self._ei_date] < end
+                and user in x[self._ei_user]
+            )
         )
 
     def csvlog(self, data):

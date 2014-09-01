@@ -127,7 +127,7 @@ class AddForm(BaseForm):
                                                                     action,
                                                                     data)
 
-    @action(_(u"action_cancel", default=u"Annulla"),
+    @action(_(u"action_cancel", default=u"Cancel"),
             validator=null_validator, name=u'cancel')
     def action_cancel(self, action, data):
         '''
@@ -189,7 +189,7 @@ class ConfirmForm(BaseForm):
             .success_handler(self, action, data)
         )
 
-    @action(_(u"action_cancel", default=u"Annulla"),
+    @action(_(u"action_cancel", default=u"Cancel"),
             validator=null_validator, name=u'cancel')
     def action_cancel(self, action, data):
         '''

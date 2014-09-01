@@ -12,7 +12,7 @@ i18n:domain="pd.prenotazioni">
 
   <body>
     <metal:main fill-slot="main">
-                  <metal:form metal:define-macro="form">
+              <metal:form metal:define-macro="form">
                 <metal:override define-slot="main">
 
                     <tal:status define="status view/status" condition="status">
@@ -127,6 +127,27 @@ i18n:domain="pd.prenotazioni">
       <tal:searched condition="python:request.get('form.actions.search', '')">
         <tal:search_results tal:define="sorted_entries view/sorted_entries;">
           <div tal:condition="sorted_entries">
+          <p tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                         start python:request.form.get('form.start');
+                         stop python:request.form.get('form.end');
+             ">
+            <tal:i18n i18n:translate=""
+                      >Found <strong i18n:name="value" tal:content="python:len(sorted_entries)"
+                        ></strong> entries
+            </tal:i18n>
+            <tal:i18n i18n:translate=""
+                      tal:condition="view/user"
+                      >with user matching &quot;<strong i18n:name="value" tal:content="view/user"></strong>&quot;
+            </tal:i18n>
+            <tal:i18n i18n:translate=""
+                      tal:condition="start"
+                      >from <strong i18n:name="value" tal:content="python:toLocalizedTime(start)"></strong>
+            </tal:i18n>
+            <tal:i18n i18n:translate=""
+                      tal:condition="stop"
+                      >to <strong i18n:name="value" tal:content="python:toLocalizedTime(stop)"></strong>
+            </tal:i18n>
+          </p>
             <tal:batch
                 define="Batch python:modules['Products.CMFPlone'].Batch;
                         b_size python:10;
