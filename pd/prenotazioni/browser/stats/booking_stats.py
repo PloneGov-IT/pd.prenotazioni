@@ -313,8 +313,8 @@ class BaseForm(PageForm):
         for line in data:
             if human_readable:
                 line[self._ei_date] = timestamp2date(line[self._ei_date])
-                line[3] = self.uid_to_url(line[3])
-                line[4] = self.uid_to_url(line[4])
+                line[4] = self.uid_to_url(line[4])['url']
+                line.pop(3)
             cw.writerow(line)
         return dummy_file.getvalue().strip('\r\n')
 
