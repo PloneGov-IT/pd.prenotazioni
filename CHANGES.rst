@@ -1,5 +1,5 @@
 
-2.0.0 (unreleased)
+1.2.0 (2014-09-10)
 ------------------
 
 - Requires rg.prenotazioni >= 3.5.0
