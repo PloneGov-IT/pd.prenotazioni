@@ -1,5 +1,5 @@
 
-1.2.1 (unreleased)
+1.2.1 (2014-09-11)
 ------------------
 
 - Look for permission in context_state view
