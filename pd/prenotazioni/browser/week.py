@@ -11,4 +11,4 @@ class View(BaseView):
     def user_can_search(self):
         ''' States if the user can see the search button
         '''
-        return self.user_can_view
+        return self.prenotazioni.user_can_view

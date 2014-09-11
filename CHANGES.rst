@@ -2,7 +2,8 @@
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Look for permission in context_state view
+  [alert]
 
 
 1.2.0 (2014-09-10)
