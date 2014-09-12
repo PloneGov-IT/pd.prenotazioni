@@ -1,5 +1,5 @@
 
-1.2.2 (unreleased)
+1.2.2 (2014-09-12)
 ------------------
 
 - When deciding the required fields in prenotazione_add form don't touch
