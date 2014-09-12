@@ -71,9 +71,18 @@ class BaseForm(RGAddForm):
         # setting required fields according to what is selected
         # in the booking folder
         required_fields = self.prenotazioni.required_booking_fields
+        # but don't touch the following
+        skip_fields = [
+            'booking_date',
+            'captcha',
+            'fullname',
+            'tipology',
+        ]
         for form_field in ff:
             field = form_field.field
-            field.required = bool(field.__name__ in required_fields)
+            field_name = field.__name__
+            if not field_name in skip_fields:
+                field.required = bool(field_name in required_fields)
         return ff
 
     def validate(self, action, data):

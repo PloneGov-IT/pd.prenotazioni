@@ -2,7 +2,9 @@
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- When deciding the required fields in prenotazione_add form don't touch
+  some fields
+  [ale-rt]
 
 
 1.2.1 (2014-09-11)
