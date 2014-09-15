@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from Products.statusmessages.interfaces import IStatusMessage
+from pd.prenotazioni import prenotazioniLogger as logger
 from plone.app.contentrules import PloneMessageFactory as _
 from plone.app.contentrules.browser.assignments import ManageAssignments
 from plone.app.contentrules.rule import get_assignments
@@ -33,6 +34,13 @@ class PatchedManageAssignments(ManageAssignments):
             del assignable[r]
             assignments = get_assignments(storage[r])
             if path in assignments:
-                get_assignments(storage[r]).remove(path, None)
+                msg = 'Try to remove from %r' % (
+                    assignments
+                )
+                logger.info(msg)
+                try:
+                    assignments.remove(path, None)
+                except:
+                    assignments.remove(path)
         status.addStatusMessage(_(u"Assignments deleted."), type='info')
         return self.template()

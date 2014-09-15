@@ -315,6 +315,9 @@ class BaseForm(PageForm):
                 line[self._ei_date] = timestamp2date(line[self._ei_date])
                 line[4] = self.uid_to_url(line[4])['url']
                 line.pop(3)
+            for idx, value in enumerate(line):
+                if isinstance(value, unicode):
+                    line[idx] = value.encode('utf8')
             cw.writerow(line)
         return dummy_file.getvalue().strip('\r\n')
 

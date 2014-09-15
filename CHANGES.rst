@@ -2,7 +2,9 @@
 1.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix csv encoding.
+- Modified content_rules patch
+  [ale-rt]
 
 
 1.2.2 (2014-09-12)
