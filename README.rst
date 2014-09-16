@@ -120,6 +120,11 @@ the manageable agendas.
 The view displays data in a table and provides a link and an action
 for downloading the logged events in a csv file.
 
+There is also a view, called ``booking_stats_delete``,
+that will delete all the log entry inserted before
+the specified date.
+
+
 Customized Searchable text
 --------------------------
 
