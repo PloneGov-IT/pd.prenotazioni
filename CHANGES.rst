@@ -1,5 +1,5 @@
 
-1.3.0 (unreleased)
+1.3.0 (2014-11-06)
 ------------------
 
 - user_can_search method moved to prenotazioni_context_state.
