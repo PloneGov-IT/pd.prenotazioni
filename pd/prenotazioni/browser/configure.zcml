@@ -66,15 +66,6 @@
 
     <browser:page
       for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
-      name="prenotazioni_week_view"
-      class="pd.prenotazioni.browser.week.View"
-      template="browser/week.pt"
-      permission="zope2.View"
-      layer="pd.prenotazioni.browser.interfaces.IPDPrenotazioniLayer"
-    />
-
-    <browser:page
-      for="rg.prenotazioni.interfaces.IPrenotazioniFolder"
       name="prenotazione_print"
       class="pd.prenotazioni.browser.prenotazione_print.PrenotazionePrint"
       template="browser/prenotazione_print.pt"

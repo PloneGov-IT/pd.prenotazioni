@@ -1,8 +1,8 @@
 
-1.2.4 (unreleased)
+1.3.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- user_can_search method moved to prenotazioni_context_state.
 
 
 1.2.3 (2014-09-15)
@@ -81,4 +81,3 @@
 - Added event handler logger
 - Package created using templer
   [RedTurtle Technology]
-

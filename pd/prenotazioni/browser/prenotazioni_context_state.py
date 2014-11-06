@@ -52,3 +52,10 @@ class PDPrenotazioniContextState(PrenotazioniContextState):
                 self.today
             )
         return super(PDPrenotazioniContextState, self).first_bookable_day
+
+    @property
+    @memoize
+    def user_can_search(self):
+        ''' States if the user can see the search button
+        '''
+        return self.user_can_view
