@@ -2,7 +2,8 @@
 1.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Properly set encoding to utf8 when registering pdf view
+  [ale-rt]
 
 
 1.3.0 (2014-11-06)

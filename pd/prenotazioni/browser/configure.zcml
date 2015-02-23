@@ -35,6 +35,7 @@
     template="prenotazione_print_pdf.pt"
     layer=".interfaces.IPDPrenotazioniLayer"
     class=".prenotazione_print_pdf.PrenotazionePrintPDF"
+    encoding="utf-8"
     permission="zope2.View"
   />
 
