@@ -1,0 +1,17 @@
+*.egg-info
+*.mo
+*.pyc
+*.pyo
+.*.swp
+.directory
+.eggs/
+.installed.cfg
+.mr.developer.cfg
+.project
+.pydevproject
+Gemfile.lock
+nogit.cfg
+/develop-eggs/
+/bin/
+/parts/
+/var/
