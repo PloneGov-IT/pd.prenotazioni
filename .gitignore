@@ -9,9 +9,9 @@
 .mr.developer.cfg
 .project
 .pydevproject
-Gemfile.lock
-nogit.cfg
-/develop-eggs/
 /bin/
+/develop-eggs/
 /parts/
 /var/
+Gemfile.lock
+nogit.cfg
