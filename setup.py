@@ -22,7 +22,7 @@ long_description = (
     'Download\n'
     '********\n')
 
-tests_require = ['zope.testing']
+tests_require = ['plone.app.testing']
 
 setup(
     name='pd.prenotazioni',
@@ -47,8 +47,11 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'Plone',
+        'plone.app.contentrules', # used by z3c.autoinclude to fix some missing permissions issues
         'setuptools',
         # -*- Extra requirements: -*-
+        'collective.contentrules.mailfromfield',
         'pd.contentrules.sms',
         'plone.api',
         'rg.prenotazioni>=3.5.0.dev0',
