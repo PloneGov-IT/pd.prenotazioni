@@ -1,5 +1,5 @@
 
-1.3.1 (unreleased)
+1.3.1 (2015-08-10)
 ------------------
 
 - Properly set encoding to utf8 when registering pdf view
