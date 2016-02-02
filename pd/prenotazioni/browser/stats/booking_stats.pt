@@ -174,7 +174,7 @@ i18n:domain="pd.prenotazioni">
                         <a href=""
                           tal:attributes="href view/csv_url">
                           Download as CSV
-                          <i class="icon-save"></i>
+                          <i class="icon-save fa fa-save"></i>
                         </a>
                       </td>
                     </tr>

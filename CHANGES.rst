@@ -2,7 +2,8 @@
 1.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Try to support all versions of collective.fontawesome
+  [ale-rt]
 
 
 1.3.1 (2015-08-10)

@@ -23,7 +23,7 @@ i18n:domain="plone">
           </tal:status>
           <h1 class="documentFirstHeading"
               tal:condition="view/label">
-            <i class="icon-exclamation-sign" style="color:#900"></i>
+            <i class="icon-exclamation-sign fa fa-exclamation-sign" style="color:#900"></i>
             <span class="documentFirstHeading"
                 i18n:translate=""
                 tal:replace="view/label"
