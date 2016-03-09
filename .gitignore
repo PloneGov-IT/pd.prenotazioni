@@ -11,6 +11,8 @@
 .pydevproject
 /bin/
 /develop-eggs/
+/include/
+/lib/
 /parts/
 /var/
 Gemfile.lock
