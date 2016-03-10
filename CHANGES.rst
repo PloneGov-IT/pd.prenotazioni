@@ -3,7 +3,9 @@
 ------------------
 
 - Try to support all versions of collective.fontawesome
-  [ale-rt]
+  [ale-rt, pnicolli]
+- Improved logo quality in pdf printout
+  [ale-rt, pnicolli]
 
 
 1.3.1 (2015-08-10)

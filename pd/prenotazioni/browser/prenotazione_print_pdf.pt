@@ -21,8 +21,8 @@ xmlns:tal="http://xml.zope.org/namespaces/tal"
               tal:content="context/portal_url">www.printbox.be - 0477/76.18.56 - printbox.be</drawCentredString-->
             <drawString x="20mm" y="2.6cm" tal:content="structure view/footer_text"></drawString>
             <!--drawCentredString x="105mm" y="2.0cm">RCN 95656 - TVA BE477.472.701 - IBAN: BE74 1262 0132 6907 - SWIFT: ARTEBEBB</drawCentredString-->
-            <image file="[z3c.pdftemplate]/sample/devis_logo.jpg" x="23mm" y="23cm"
-              tal:attributes="file string:${context/portal_url}/logo.png"
+            <image file="[z3c.pdftemplate]/sample/devis_logo.jpg" x="23mm" y="23cm" preserveAspectRatio="True" height="3cm"
+              tal:attributes="file string:${context/portal_url}/logo-print-pdf.png"
               />
 
             <!--setFont name="Helvetica" size="135"/>
