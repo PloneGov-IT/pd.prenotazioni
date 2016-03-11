@@ -1,10 +1,10 @@
 
-1.3.2 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
 - Try to support all versions of collective.fontawesome
-  [ale-rt, pnicolli]
 - Improved logo quality in pdf printout
+- Logo in reservation PDF receipt is now logo-print-pdf.png
   [ale-rt, pnicolli]
 
 

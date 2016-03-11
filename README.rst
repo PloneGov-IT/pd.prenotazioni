@@ -35,7 +35,7 @@ In any case at least one between email, mobile and phone
 should be given at booking time.
 
 The field "same_day_booking_disallowed" has 3 possible states:
-    
+
 1. Yes
 2. No
 3. No, just for today
@@ -146,6 +146,19 @@ The product adds to the agenda some pop-ups using the library `tooltipster`__
 __ http://iamceege.github.io/tooltipster/
 
 
+Booking receipt in PDF format
+=============================
+
+This product can render a PDF receipt of you booking.
+You may want to provide a logo.
+
+Since version 2.0.0,
+in order to print the logo on the PDF,
+you need a public image called `logo-print-pdf.png`.
+
+Before version 2.0.0,
+you needed a public image called `logo.png`.
+
 Credits
 =======
 
@@ -167,5 +180,3 @@ This product was developed by RedTurtle Technology team.
 .. image:: http://www.redturtle.it/redturtle_banner.png
    :alt: RedTurtle Technology Site
       :target: http://www.redturtle.it/
-
-
