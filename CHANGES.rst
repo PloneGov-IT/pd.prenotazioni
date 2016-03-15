@@ -1,5 +1,5 @@
 
-1.3.2 (unreleased)
+1.4.0 (2016-03-15)
 ------------------
 
 - Try to support all versions of collective.fontawesome
