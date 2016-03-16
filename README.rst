@@ -35,7 +35,7 @@ In any case at least one between email, mobile and phone
 should be given at booking time.
 
 The field "same_day_booking_disallowed" has 3 possible states:
-    
+
 1. Yes
 2. No
 3. No, just for today
@@ -85,6 +85,29 @@ dedicate to the booking product:
 __ https://pypi.python.org/pypi/collective.contentrules.mailfromfield
 
 
+Booking PDF receipt
+-------------------
+
+There is a view called ``prenotazione_print_pdf``
+that uses reportlab to create a high quality PDF file
+with the details of the booking.
+
+Since version **1.5.0**, the logo is optional and configurable.
+
+The logo can be customized
+adding to the instance part
+of your buildout this snippet::
+
+  zope-conf-additional +=
+    <product-config pd.prenotazioni>
+        logo file://${buildout:directory}/resources/logo-print-pdf.png
+    </product-config>
+
+the value for the logo property should be a valid URL, e.g.:
+
+ - file://some/path/logo.jpg
+ - http://example.com/logo.jpg
+
 Custom event log
 ----------------
 
@@ -97,7 +120,9 @@ The product registers, optionally, some events to an external logfile:
 In order to track modification the product adds the booking content type
 to the reposository tool.
 
-The custom event log has to be enabled adding to the instance part
+The custom event log has to be enabled
+setting a custom property ``logfile``,
+adding to the instance part
 of your buildout this snippet::
 
   zope-conf-additional +=
@@ -167,5 +192,3 @@ This product was developed by RedTurtle Technology team.
 .. image:: http://www.redturtle.it/redturtle_banner.png
    :alt: RedTurtle Technology Site
       :target: http://www.redturtle.it/
-
-

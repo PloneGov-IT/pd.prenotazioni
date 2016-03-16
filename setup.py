@@ -13,14 +13,15 @@ version = '1.4.1.dev0'
 
 long_description = (
     read('README.rst')
-    + '\n' +
+    + '\n\n' +
     'Change history\n'
-    '**************\n\n'
+    '==============\n\n'
     + '\n' +
     read('CHANGES.rst')
     + '\n' +
     'Download\n'
-    '********\n')
+    '********\n'
+)
 
 tests_require = ['plone.app.testing']
 
@@ -48,7 +49,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Plone',
-        'plone.app.contentrules', # used by z3c.autoinclude to fix some missing permissions issues
+        'plone.app.contentrules',  # used by z3c.autoinclude to fix some missing permissions issues  # noqa
         'setuptools',
         # -*- Extra requirements: -*-
         'collective.contentrules.mailfromfield',

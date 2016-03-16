@@ -2,8 +2,10 @@
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+New:
 
+- The logo for the pdf is now configurable through zope.conf
+  [ale-rt]
 
 1.4.0 (2016-03-15)
 ------------------
