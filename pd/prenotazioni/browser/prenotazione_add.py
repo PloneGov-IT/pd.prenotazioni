@@ -150,9 +150,9 @@ class ConfirmForm(BaseForm):
     """ The confirm form wants a checksum
     """
     template = ViewPageTemplateFile('prenotazione_confirm.pt')
-    label = _(
+    label = __(
         'booking_to_be_confirmed',
-        u"Prenotazione da confermare"
+        u"Riepilogo dati prenotazione"
     )
     description = _(
         'booking_confirmation_help',
@@ -188,7 +188,7 @@ class ConfirmForm(BaseForm):
             )
         return ff
 
-    @action(_('action_confirm', u'Conferma'), name=u'book')
+    @action(__('action_confirm', u'Conferma'), name=u'book')
     def action_book(self, action, data):
         ''' Book this resource
         '''

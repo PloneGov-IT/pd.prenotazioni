@@ -56,6 +56,14 @@ i18n:domain="plone">
                   </div>
                 </tal:block>
 
+		     <div id="actionsView">
+		        <span class="actionButtons"
+		               tal:condition="view/availableActions"
+		               metal:define-slot="bottom_buttons">
+		           <input tal:repeat="action view/actions" tal:replace="structure action/render" />
+		         </span>
+		     </div>
+
               </metal:block>
               <div metal:define-slot="extra_info" tal:replace="nothing"></div>
               <fieldset tal:define="form_name view/form_name|nothing"
@@ -64,10 +72,10 @@ i18n:domain="plone">
                         tal:content="form_name"
                         i18n:translate="">Form name</legend>
                 <tal:block tal:repeat="widget view/widgets">
-                  <div tal:define="description widget/hint;
+                  <div style="display:flex" tal:define="description widget/hint;
                                    error widget/error;">
                     <tal:input on-error="nothing" content="structure widget/hidden" />
-                    <label tal:condition="widget/label" tal:attributes="for widget/name">
+                    <label style="width:20%; text-align:right; margin-right:1em" tal:condition="widget/label" tal:attributes="for widget/name">
                       <span i18n:translate="" tal:content="widget/label">label</span>
                     </label>
                     <div class="field error" tal:condition="python:error">
