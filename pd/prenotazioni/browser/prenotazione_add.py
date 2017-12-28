@@ -188,7 +188,7 @@ class ConfirmForm(BaseForm):
             )
         return ff
 
-    @action(__('action_confirm', u'Conferma'), name=u'book')
+    @action(__('action_confirm', u'Iniva Richiesta'), name=u'book')
     def action_book(self, action, data):
         ''' Book this resource
         '''
