@@ -11,13 +11,16 @@ from zope.formlib.form import Fields, action
 from zope.schema import TextLine, ValidationError
 import re
 
+# OBSOLETED
 TELEPHONE_PATTERN = re.compile(r'^3([0-9]| )*$')
 
 
+# OBSOLETED
 class InvalidMobile(ValidationError):
     __doc__ = _("invalid_mobile_number", "Mobile phone number not valid")
 
 
+# OBSOLETED
 def check_mobile_number(value):
     '''
     If value exist it should match TELEPHONE_PATTERN
@@ -34,7 +37,7 @@ def check_mobile_number(value):
 class BaseForm(RGAddForm):
     """ Customize the rg.prenotazioni form
     """
-    contact_details = ['phone', 'mobile', 'email']
+    contact_details = ['phone', 'email']
 
     def get_data_checksum(self, data):
         """ Return a checksum based on the submitted data
@@ -67,7 +70,8 @@ class BaseForm(RGAddForm):
         This method adds mobile number validation to prenotazioni form
         '''
         ff = super(BaseForm, self).form_fields
-        ff['mobile'].field.constraint = check_mobile_number
+        # ff['mobile'].field.constraint = check_mobile_number
+        ff = ff.omit('mobile')
         # setting required fields according to what is selected
         # in the booking folder
         required_fields = self.prenotazioni.required_booking_fields
@@ -90,11 +94,11 @@ class BaseForm(RGAddForm):
         Checks if we can book those data
         '''
         errors = super(BaseForm, self).validate(action, data)
-        if not any([data.get(key, False) for key in self.contact_details]):
-            msg = _('contact_details_error',
-                    u'You have to provide at least one of these fields: '
-                    u'email, phone, mobile')
-            self.set_invariant_error(errors, self.contact_details, msg)
+        # if not any([data.get(key, False) for key in self.contact_details]):
+        #     msg = _('contact_details_error',
+        #             u'You have to provide at least one of these fields: '
+        #             u'email, phone, mobile')
+        #     self.set_invariant_error(errors, self.contact_details, msg)
         return errors
 
 
