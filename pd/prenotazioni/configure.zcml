@@ -18,6 +18,8 @@
   <include package=".upgrades" />
   <include package=".vocs" />
 
+  <include file="monkey.zcml" />
+
   <!-- Extend rg.prenotazioni content types -->
   <include package="archetypes.schemaextender" />
   <adapter

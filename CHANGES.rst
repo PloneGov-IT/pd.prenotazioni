@@ -2,7 +2,8 @@
 1.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Monkeypatch for __sub__ method in BaseSlot.
+  [cekk]
 
 
 1.5.0 (2016-03-16)

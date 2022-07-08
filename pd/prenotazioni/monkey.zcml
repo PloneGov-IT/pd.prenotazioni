@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="pd.prenotazioni">
+
+  <include package="collective.monkeypatcher" />
+
+   <monkey:patch
+        description="Patch per il metodo __sub__ di slot (#31395)"
+        class="rg.prenotazioni.adapters.slot.BaseSlot"
+        original="__sub__"
+        replacement=".monkey.patchSub"
+        />
+
+</configure>
