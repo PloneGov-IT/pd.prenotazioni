@@ -1,5 +1,5 @@
 
-1.5.1 (unreleased)
+1.6.0 (2022-07-08)
 ------------------
 
 - Monkeypatch for __sub__ method in BaseSlot.
