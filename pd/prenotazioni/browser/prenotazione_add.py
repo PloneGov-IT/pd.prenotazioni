@@ -12,7 +12,7 @@ from zope.schema import TextLine, ValidationError
 import re
 
 # OBSOLETED
-TELEPHONE_PATTERN = re.compile(r'^3([0-9]| )*$')
+TELEPHONE_PATTERN = re.compile(r"^3([0-9]| )*$")
 
 
 # OBSOLETED
@@ -22,9 +22,9 @@ class InvalidMobile(ValidationError):
 
 # OBSOLETED
 def check_mobile_number(value):
-    '''
+    """
     If value exist it should match TELEPHONE_PATTERN
-    '''
+    """
     if not value:
         return True
     if isinstance(value, basestring):
@@ -35,52 +35,49 @@ def check_mobile_number(value):
 
 
 class BaseForm(RGAddForm):
-    """ Customize the rg.prenotazioni form
-    """
-    contact_details = ['phone', 'email']
+    """Customize the rg.prenotazioni form"""
+
+    contact_details = ["phone", "email"]
 
     def get_data_checksum(self, data):
-        """ Return a checksum based on the submitted data
+        """Return a checksum based on the submitted data
 
         This is useful to get rid of the captcha in the confirm form
         """
         uid = self.context.UID()
-        key = uid + data['booking_date'].strftime('%s')
+        key = uid + data["booking_date"].strftime("%s")
         return md5(key).hexdigest()[:5].upper()
 
     def is_checksum_valid(self, data):
-        """ Check if the data passed have the right checksum
-        """
-        observed_checksum = data.get('checksum', '')
+        """Check if the data passed have the right checksum"""
+        observed_checksum = data.get("checksum", "")
         expected_checksum = self.get_data_checksum(data)
         return observed_checksum == expected_checksum
 
     def present_input_value(self, widget):
-        """ Given a widget present its input value
-        """
+        """Given a widget present its input value"""
         if widget.name == "form.booking_date":
-            return self.localized_time(widget.getInputValue(),
-                                       long_format=True)
+            return self.localized_time(widget.getInputValue(), long_format=True)
         return widget.getInputValue()
 
     @property
     @memoize
     def form_fields(self):
-        '''
+        """
         This method adds mobile number validation to prenotazioni form
-        '''
+        """
         ff = super(BaseForm, self).form_fields
         # ff['mobile'].field.constraint = check_mobile_number
-        ff = ff.omit('mobile')
+        ff = ff.omit("mobile")
         # setting required fields according to what is selected
         # in the booking folder
         required_fields = self.prenotazioni.required_booking_fields
         # but don't touch the following
         skip_fields = [
-            'booking_date',
-            'captcha',
-            'fullname',
-            'tipology',
+            "booking_date",
+            "captcha",
+            "fullname",
+            "tipology",
         ]
         for form_field in ff:
             field = form_field.field
@@ -90,9 +87,9 @@ class BaseForm(RGAddForm):
         return ff
 
     def validate(self, action, data):
-        '''
+        """
         Checks if we can book those data
-        '''
+        """
         errors = super(BaseForm, self).validate(action, data)
         # if not any([data.get(key, False) for key in self.contact_details]):
         #     msg = _('contact_details_error',
@@ -103,110 +100,96 @@ class BaseForm(RGAddForm):
 
 
 class AddForm(BaseForm):
-    """ Customized add form
+    """Customized add form
 
     It submits to a confirm form
     """
+
     def get_confirm_url(self, data):
-        ''' The URL that send to the confirm form
-        '''
+        """The URL that send to the confirm form"""
         request_form = self.request.form
         params = {}
         for key in request_form.keys():
-            if (
-                key.startswith('form.')
-                and (not key.startswith('form.actions.'))
-            ):
+            if key.startswith("form.") and (not key.startswith("form.actions.")):
                 value = request_form[key]
                 if isinstance(value, unicode):
-                    value = value.encode('utf8')
+                    value = value.encode("utf8")
                 params[key] = value
         params["form.checksum"] = self.get_data_checksum(data)
 
         return urlify(
-            self.context.absolute_url(),
-            '@@prenotazione_confirm',
-            params=params
+            self.context.absolute_url(), "@@prenotazione_confirm", params=params
         )
 
-    @action(__('action_book', u'Book'), name=u'book')
+    @action(__("action_book", u"Book"), name=u"book")
     def action_book(self, action, data):
-        ''' Book this resource
-        '''
+        """Book this resource"""
         if self.is_anonymous:
             return self.request.response.redirect(self.get_confirm_url(data))
         else:
-            return super(AddForm, self).action_book.success_handler(self,
-                                                                    action,
-                                                                    data)
+            return super(AddForm, self).action_book.success_handler(self, action, data)
 
-    @action(_(u"action_cancel", default=u"Cancel"),
-            validator=null_validator, name=u'cancel')
+    @action(
+        _(u"action_cancel", default=u"Cancel"), validator=null_validator, name=u"cancel"
+    )
     def action_cancel(self, action, data):
-        '''
+        """
         Cancel
-        '''
+        """
         target = self.back_to_booking_url
         return self.request.response.redirect(target)
 
 
 class ConfirmForm(BaseForm):
-    """ The confirm form wants a checksum
-    """
-    template = ViewPageTemplateFile('prenotazione_confirm.pt')
-    label = __(
-        'booking_to_be_confirmed',
-        u"Riepilogo dati prenotazione"
-    )
+    """The confirm form wants a checksum"""
+
+    template = ViewPageTemplateFile("prenotazione_confirm.pt")
+    label = __("booking_to_be_confirmed", u"Riepilogo dati prenotazione")
     description = _(
-        'booking_confirmation_help',
+        "booking_confirmation_help",
         u"We assigned you a booking time. "
-        u"Please review your data before confirming your booking"
+        u"Please review your data before confirming your booking",
     )
 
     def validate(self, action, data):
-        '''
+        """
         Checks if we can book those data
-        '''
+        """
         errors = super(ConfirmForm, self).validate(action, data)
         if self.is_anonymous:
             if not self.is_checksum_valid(data):
-                msg = _('checksum_error', u'Invalid checksum')
-                self.set_invariant_error(errors, ['checksum'], msg)
+                msg = _("checksum_error", u"Invalid checksum")
+                self.set_invariant_error(errors, ["checksum"], msg)
         return errors
 
     @property
     @memoize
     def form_fields(self):
-        '''
+        """
         This method adds mobile number validation to prenotazioni form
-        '''
+        """
         ff = super(ConfirmForm, self).form_fields
-        ff = ff.omit('captcha')
+        ff = ff.omit("captcha")
         if self.is_anonymous:
             ff = ff + Fields(
                 TextLine(
-                    __name__='checksum',
-                    title=_('verification_code', u"Verification code")
+                    __name__="checksum",
+                    title=_("verification_code", u"Verification code"),
                 )
             )
         return ff
 
-    @action(__('action_confirm', u'Iniva Richiesta'), name=u'book')
+    @action(__("action_confirm", u"Invia Richiesta"), name=u"book")
     def action_book(self, action, data):
-        ''' Book this resource
-        '''
-        return (
-            super(ConfirmForm, self)
-            .action_book
-            .success_handler(self, action, data)
-        )
+        """Book this resource"""
+        return super(ConfirmForm, self).action_book.success_handler(self, action, data)
 
-    @action(_(u"action_cancel", default=u"Cancel"),
-            validator=null_validator, name=u'cancel')
+    @action(
+        _(u"action_cancel", default=u"Cancel"), validator=null_validator, name=u"cancel"
+    )
     def action_cancel(self, action, data):
-        '''
+        """
         Cancel
-        '''
+        """
         target = self.back_to_booking_url
         return self.request.response.redirect(target)

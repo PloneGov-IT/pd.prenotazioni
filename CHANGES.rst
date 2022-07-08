@@ -2,8 +2,8 @@
 1.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix typo.
+  [cekk]
 
 1.6.0 (2022-07-08)
 ------------------
